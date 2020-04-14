@@ -1,0 +1,59 @@
+<project name="expenseManagerProg" default="compile_all" basedir="..">
+
+  <property name="BUILD.compiler" value="modern" />
+  <property name="src" value="src" />
+  <property name="BUILD" value="src/BUILD" />
+  <property name="classes" value="${BUILD}/classes" />
+  <property name="resultFiles" value="${BUILD}/resultFiles" />
+
+  <target name="all" depends="compile_all" />
+
+  <target name="compile_all" depends="expenseManagerProg" />
+
+  <target name="clean">
+    <delete dir="${BUILD}" />
+  </target>
+
+  <!-- Prepare target directories -->
+  <target name="prepare">
+    <mkdir dir="${BUILD}" />
+    <mkdir dir="${classes}" />
+    <mkdir dir="${resultFiles}" />
+  </target>
+
+  <target name="jar">
+    <mkdir dir="${BUILD}/jar" />
+    <jar destfile="${BUILD}/jar/expenseManagerProg.jar" basedir="${BUILD}/classes">
+      <manifest>
+        <attribute name="Main-Class" value="expenseManagerProg.driver.Driver" />
+      </manifest>
+    </jar>
+  </target>
+
+  <!-- ** means all subdirectories as well -->
+  <!-- * means all files in the current directory -->
+  <!-- for just java files use *.java -->
+
+  <target name="expenseManagerProg" depends="prepare">
+    <javac includeantruntime="false" 
+      srcdir="${src}" 
+      includes="expenseManagerProg/**" 
+      excludes="**/package.html" 
+      destdir="${classes}" 
+      classpath="${classes}" 
+      debug="on" 
+      optimize="on" 
+      deprecation="off" 
+    />
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="${BUILD}/jar/expenseManagerProg.jar" fork="true">
+      <arg value="${inputFile}" /> <!-- Input file path -->
+      <arg value="${availableItemsFile}" /> <!-- Available items file path -->
+      <arg value="${runAvgWinSize}" /> <!-- Window size for running average calculation -->
+      <arg value="${outputFile}" /> <!-- Output file path -->
+    </java>
+  </target>
+
+</project>
