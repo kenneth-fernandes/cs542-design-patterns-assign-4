@@ -49,20 +49,16 @@ ant run -buildfile expenseManagerProg/src/build.xml \
 
 1. Assumption:
 
-2) Data Structures:
+2. Data Structures:
 
 3. External Materials:
 
-4) Compiling:
-
-```compilation-steps
-- Follow the instructions as mentioned above.
-```
+4. Compiling:
+    - Follow the instructions as mentioned above.
 
 5. Execute Program:
-```execution-steps
-- Follow the instruction as mentioned above.
-```
+    - Follow the instruction as mentioned above.
+
 6. Code Working:
 
 ---
