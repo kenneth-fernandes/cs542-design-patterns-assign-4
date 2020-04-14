@@ -8,7 +8,7 @@
 
   <target name="all" depends="compile_all" />
 
-  <target name="compile_all" depends="expenseManagerProg" />
+  <target name="compile_all" depends="expenseManager" />
 
   <target name="clean">
     <delete dir="${BUILD}" />
@@ -23,9 +23,9 @@
 
   <target name="jar">
     <mkdir dir="${BUILD}/jar" />
-    <jar destfile="${BUILD}/jar/expenseManagerProg.jar" basedir="${BUILD}/classes">
+    <jar destfile="${BUILD}/jar/expenseManager.jar" basedir="${BUILD}/classes">
       <manifest>
-        <attribute name="Main-Class" value="expenseManagerProg.driver.Driver" />
+        <attribute name="Main-Class" value="expenseManager.driver.Driver" />
       </manifest>
     </jar>
   </target>
@@ -34,10 +34,10 @@
   <!-- * means all files in the current directory -->
   <!-- for just java files use *.java -->
 
-  <target name="expenseManagerProg" depends="prepare">
+  <target name="expenseManager" depends="prepare">
     <javac includeantruntime="false" 
       srcdir="${src}" 
-      includes="expenseManagerProg/**" 
+      includes="expenseManager/**" 
       excludes="**/package.html" 
       destdir="${classes}" 
       classpath="${classes}" 
@@ -48,7 +48,7 @@
   </target>
 
   <target name="run" depends="jar">
-    <java jar="${BUILD}/jar/expenseManagerProg.jar" fork="true">
+    <java jar="${BUILD}/jar/expenseManager.jar" fork="true">
       <arg value="${inputFile}" /> <!-- Input file path -->
       <arg value="${availableItemsFile}" /> <!-- Available items file path -->
       <arg value="${runAvgWinSize}" /> <!-- Window size for running average calculation -->
