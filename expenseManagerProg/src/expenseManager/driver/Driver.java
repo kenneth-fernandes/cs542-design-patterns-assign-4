@@ -1,7 +1,7 @@
 package expenseManager.driver;
 
 /**
- * @author Kenneth Peter Faernandes
+ * @author Kenneth Peter Fernandes
  */
 public class Driver {
 	public static void main(String[] args) throws Exception {
