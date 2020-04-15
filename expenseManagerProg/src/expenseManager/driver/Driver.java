@@ -7,11 +7,12 @@ import java.util.Map;
 
 import expenseManager.items.AvailableItems;
 import expenseManager.util.fileprocess.FileProcessor;
-import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.input.ExpenseManagerInput;
 import expenseManager.util.input.InputParametersI;
 
 /**
+ * Driver class - The entry point of the program
+ * 
  * @author Kenneth Peter Fernandes
  */
 public class Driver {
@@ -39,17 +40,7 @@ public class Driver {
 			inputParamsObj.setOutputFilePath(args[3]);
 		}
 		AvailableItems.getInstance().processData(new FileProcessor(inputParamsObj.getAvailableItemsFilePath()));
-		HashMap<String, List<String>> hMap = AvailableItems.getInstance().getData();
-		Iterator hmIterator = hMap.entrySet().iterator();
-		while (hmIterator.hasNext()) {
-			Map.Entry mapElement = (Map.Entry) hmIterator.next();
-			System.out.println(mapElement.getKey() + " - " + mapElement.getValue());
-		}
-		/*HashMap<String, List<String>> hMap = AvailableItems.getInstance().getData();
-		while (hMap.entrySet().iterator().hasNext()) {
-			Map.Entry mapElement = (Map.Entry) hMap.entrySet().iterator().next();
-			System.out.println(mapElement.getKey() + " - " + mapElement.getValue());
-		}*/
+
 		/*
 		 * String str; System.out.println(); str = ""; FileProcessorI
 		 * inputFileProcessObj = new FileProcessor(inputParamsObj.getInputFilePath());
