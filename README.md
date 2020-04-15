@@ -39,7 +39,7 @@ Description: Compiles your code and generates .class files inside the BUILD fold
 ant run -buildfile expenseManagerProg/src/build.xml \
 -DinputFile="inputFiles/input.txt" \
 -DavailableItemsFile="inputFiles/available-items.txt" \
--DrunningAverageWindowSize=2 \
+-DrunAvgWinSize=2 \
 -DoutputFile="src/BUILD/resultFiles/output.txt"
 ```
 
