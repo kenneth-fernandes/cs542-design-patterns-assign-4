@@ -5,5 +5,5 @@ package expenseManager.state;
  */
 public interface SpendingStateI {
 
-    
+    public void storeData(String data, boolean isPurchasable);
 }
