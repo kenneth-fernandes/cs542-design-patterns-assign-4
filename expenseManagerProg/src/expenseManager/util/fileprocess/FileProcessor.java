@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * The Class FileProcessor performs file related operations.
+ * The class FileProcessor performs file related operations.
  * 
  * @author Kenneth Fernandes
  */
