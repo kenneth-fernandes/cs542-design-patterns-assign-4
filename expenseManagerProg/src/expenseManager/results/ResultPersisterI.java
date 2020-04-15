@@ -1,6 +1,12 @@
 package expenseManager.results;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface ResultPersisterI {
-    
-    public void storeResultToFile();
+    /**
+     * 
+     * @param filePath
+     */
+    public void storeResultToFile(String filePath) throws FileNotFoundException, IOException;
 }
