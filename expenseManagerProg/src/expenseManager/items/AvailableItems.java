@@ -14,9 +14,13 @@ import expenseManager.util.fileprocess.FileProcessorI;
  * @author Kenneth Fernandes
  */
 public class AvailableItems implements AvailableItemsI {
-
+    //
     private static AvailableItemsI availItemsObj = new AvailableItems();
+    //
     private HashMap<String, List<String>> availItemsData = new HashMap<>();
+    //
+    private String availItemData;
+
 
     /**
      * AvailableItems private constructor
@@ -43,10 +47,10 @@ public class AvailableItems implements AvailableItemsI {
      */
     @Override
     public void processData(FileProcessorI availItemsFileProcessObj) {
-        String data;
+        
         try {
-            while ((data = availItemsFileProcessObj.readLine()) != null) {
-                String[] keyValArr = data.split(":");
+            while ((availItemData = availItemsFileProcessObj.readLine()) != null) {
+                String[] keyValArr = availItemData.split(":");
                 insertData(keyValArr[0], keyValArr[1]);
             }
             availItemsFileProcessObj.closeFile();

@@ -5,6 +5,9 @@ import java.util.List;
 
 import expenseManager.util.fileprocess.FileProcessorI;
 
+/**
+ * AvailableItemsI
+ */
 public interface AvailableItemsI {
 
     /**
