@@ -1,12 +1,25 @@
 package expenseManager.util.input;
 
 public class ExpenseManagerInput implements InputParametersI {
-
+    //
     private static InputParametersI expenseInputParamObj = new ExpenseManagerInput();
+    //
     private String inputFilePath;
+    //
     private String availableItemsFilePath;
+    //
     private int runAvgWinSize;
+    //
     private String outputFilePath;
+
+    //
+    private boolean isInputFilePathSet = false;
+    //
+    private boolean isAvailItemsFilePathSet = false;
+    //
+    private boolean isRunAvgWinSizeSet = false;
+    //
+    private boolean isOutputFilePathSet = false;
 
     /**
      * ExpenseManagerInput class private constructor
@@ -30,7 +43,10 @@ public class ExpenseManagerInput implements InputParametersI {
      */
     @Override
     public void setInputFilePath(String path) {
-        inputFilePath = path;
+        if (!isInputFilePathSet) {
+            inputFilePath = path;
+            isInputFilePathSet = true;
+        }
     }
 
     /**
@@ -51,7 +67,10 @@ public class ExpenseManagerInput implements InputParametersI {
      */
     @Override
     public void setAvailableItemsFilePath(String path) {
-        availableItemsFilePath = path;
+        if (!isAvailItemsFilePathSet) {
+            availableItemsFilePath = path;
+            isAvailItemsFilePathSet = true;
+        }
     }
 
     /**
@@ -74,7 +93,10 @@ public class ExpenseManagerInput implements InputParametersI {
      */
     @Override
     public void setRunAvgWinSize(String runAvgWinSizeStr) {
-        runAvgWinSize = Integer.parseInt(runAvgWinSizeStr);
+        if (!isRunAvgWinSizeSet) {
+            runAvgWinSize = Integer.parseInt(runAvgWinSizeStr);
+            isRunAvgWinSizeSet = true;
+        }
     }
 
     /**
@@ -95,7 +117,10 @@ public class ExpenseManagerInput implements InputParametersI {
      */
     @Override
     public void setOutputFilePath(String path) {
-        outputFilePath = path;
+        if (!isOutputFilePathSet) {
+            outputFilePath = path;
+            isOutputFilePathSet = true;
+        }
     }
 
     /**
