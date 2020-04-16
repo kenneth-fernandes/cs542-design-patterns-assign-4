@@ -40,14 +40,15 @@ public class Driver {
 		}
 		AvailableItems.getInstance().processData(new FileProcessor(inputParamsObj.getAvailableItemsFilePath()));
 		SpendingStateI context = new ExpenseManagerContext();
-		String str;
+		String dataStr;
 		System.out.println();
-		str = "";
+		dataStr = "";
 		FileProcessorI inputFileProcessObj = new FileProcessor(inputParamsObj.getInputFilePath());
-		while ((str = inputFileProcessObj.readLine()) != null) {
-			String[] strArr = str.split(":");
+		while ((dataStr = inputFileProcessObj.readLine()) != null) {
+			String[] strArr = dataStr.split(":");
 			if (strArr[0].equals("item")) {
 				context.processItem(strArr[1]);
+
 			} else {
 				context.creditMoney(Integer.parseInt(strArr[1]));
 			}
