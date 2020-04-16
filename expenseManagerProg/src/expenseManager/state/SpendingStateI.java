@@ -5,5 +5,7 @@ package expenseManager.state;
  */
 public interface SpendingStateI {
 
-    public void storeData(String data, boolean isPurchasable);
+    public void creditMoney(int amount);
+
+    public void processItem(String item);
 }

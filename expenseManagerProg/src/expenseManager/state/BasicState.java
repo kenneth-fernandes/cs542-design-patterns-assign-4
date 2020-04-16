@@ -1,19 +1,67 @@
 package expenseManager.state;
 
+import java.util.List;
+
+import expenseManager.context.ExpenseManagerContextI;
+import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseManagerResults;
+import expenseManager.util.input.ExpenseManagerInput;
 
 /**
  * BasicSpendingState
  */
 public class BasicState implements SpendingStateI {
-    public BasicState(SpendingStateI expenseMngrCntxtObj) {
 
+    private ExpenseManagerContextI expenseMngrCntxtObj;
+
+    public BasicState(ExpenseManagerContextI inExpenseMngrCntxtObj) {
+        expenseMngrCntxtObj = inExpenseMngrCntxtObj;
     }
 
     @Override
-    public void storeData(String data, boolean isPurchasable) {
-        ExpenseManagerResults.getExpenseResultInstance()
-                .storeResults("BASIC::" + data + "--" + (isPurchasable ? "YES" : "NO"));
+    public void creditMoney(int amount) {
+        List<Integer> moneyCreditList = expenseMngrCntxtObj.getMoneyCreditLst();
+        moneyCreditList.add(amount);
+        performRunAvgCaln(moneyCreditList, ExpenseManagerInput.getInstance().getRunAvgWinSize());
+        performStateChange();
+    }
+
+    @Override
+    public void processItem(String item) {
+        String itemType = AvailableItems.getInstance().getKeyByData(item);
+        if (!itemType.isEmpty()) {
+            ExpenseManagerResults.getExpenseResultInstance()
+                    .storeResults("BASIC::" + item + "--" + (itemType.equals("basic") ? "YES" : "NO"));
+        }
+
+    }
+
+    private void performRunAvgCaln(List<Integer> moneyCreditList, int windowSize) {
+        int total = 0;
+        if (moneyCreditList.size() == windowSize) {
+            for (Integer money : moneyCreditList) {
+                total += money;
+            }
+            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / windowSize);
+            moneyCreditList.remove(0);
+        } else {
+            for (Integer money : moneyCreditList) {
+                total += money;
+            }
+            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
+        }
+        System.out.println(expenseMngrCntxtObj.getRunAvgCreditAmount());
+    }
+
+    private void performStateChange() {
+        Double avg = expenseMngrCntxtObj.getRunAvgCreditAmount();
+        if (avg >= (double) 10000 && avg < (double) 50000) {
+            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getLuxuriousState());
+        } else if (avg >= (double) 50000) {
+            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getExtravagantState());
+        } else {
+            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getBasicState());
+        }
     }
 
 }
