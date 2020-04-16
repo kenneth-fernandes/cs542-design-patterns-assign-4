@@ -1,7 +1,11 @@
 package expenseManager.driver;
 
+import expenseManager.context.ExpenseManagerContext;
 import expenseManager.items.AvailableItems;
+import expenseManager.results.ExpenseManagerResults;
+import expenseManager.state.SpendingStateI;
 import expenseManager.util.fileprocess.FileProcessor;
+import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.input.ExpenseManagerInput;
 import expenseManager.util.input.InputParametersI;
 
@@ -35,14 +39,20 @@ public class Driver {
 			inputParamsObj.setOutputFilePath(args[3]);
 		}
 		AvailableItems.getInstance().processData(new FileProcessor(inputParamsObj.getAvailableItemsFilePath()));
+		SpendingStateI context = new ExpenseManagerContext();
+		String str;
+		System.out.println();
+		str = "";
+		FileProcessorI inputFileProcessObj = new FileProcessor(inputParamsObj.getInputFilePath());
+		while ((str = inputFileProcessObj.readLine()) != null) {
+			String[] strArr = str.split(":");
+			if (strArr[0].equals("item")) {
+				context.processItem(strArr[1]);
+			} else {
+				context.creditMoney(Integer.parseInt(strArr[1]));
+			}
+		}
+		ExpenseManagerResults.getExpenseResultPersisterInstance().storeResultToFile(inputParamsObj.getOutputFilePath());
 
-		/*
-		 * String str; System.out.println(); str = ""; FileProcessorI
-		 * inputFileProcessObj = new FileProcessor(inputParamsObj.getInputFilePath());
-		 * while ((str = inputFileProcessObj.readLine()) != null) {
-		 * System.out.println(str);
-		 * 
-		 * }
-		 */
 	}
 }
