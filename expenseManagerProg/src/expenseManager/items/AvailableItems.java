@@ -21,7 +21,6 @@ public class AvailableItems implements AvailableItemsI {
     //
     private String availItemData;
 
-
     /**
      * AvailableItems private constructor
      */
@@ -47,7 +46,7 @@ public class AvailableItems implements AvailableItemsI {
      */
     @Override
     public void processData(FileProcessorI availItemsFileProcessObj) {
-        
+
         try {
             while ((availItemData = availItemsFileProcessObj.readLine()) != null) {
                 String[] keyValArr = availItemData.split(":");
@@ -93,6 +92,22 @@ public class AvailableItems implements AvailableItemsI {
             availItemsData.put(key, lst);
         }
 
+    }
+
+    /**
+     * The function returns the item stored in the HashMap corressponding to the key
+     * 
+     * @return - The item stored in the HashMap corressponding to the key
+     */
+    public String getKeyByData(String itemData) {
+        for (String itemType : availItemsData.keySet()) {
+            for (String item : availItemsData.get(itemType)) {
+                if (itemData.equals(item)) {
+                    return itemType;
+                }
+            }
+        }
+        return "";
     }
 
     @Override

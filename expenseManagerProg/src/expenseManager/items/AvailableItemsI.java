@@ -26,4 +26,11 @@ public interface AvailableItemsI {
      */
     public HashMap<String, List<String>> getData();
 
+    /**
+     * The function returns the key corressponding to which the item is stored
+     * 
+     * @return - The key corressponding to which the item is stored
+     */
+    public String getKeyByData(String itemData);
+
 }
