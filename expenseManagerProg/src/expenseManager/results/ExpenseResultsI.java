@@ -1,5 +1,5 @@
 package expenseManager.results;
 
-public interface ResultsI {
+public interface ExpenseResultsI {
     public void storeResults(String resultData);
 }

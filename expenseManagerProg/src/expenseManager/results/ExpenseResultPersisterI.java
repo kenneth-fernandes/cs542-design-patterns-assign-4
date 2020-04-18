@@ -3,7 +3,7 @@ package expenseManager.results;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public interface ResultPersisterI {
+public interface ExpenseResultPersisterI {
     /**
      * 
      * @param filePath

@@ -6,19 +6,19 @@ import java.io.IOException;
 import expenseManager.util.persister.DataPersisterToFile;
 import expenseManager.util.persister.DataPersisterToFileI;
 
-public class ExpenseManagerResults implements ResultsI, ResultPersisterI {
+public class ExpenseMngrResults implements ExpenseResultsI, ExpenseResultPersisterI {
     private String expenseResults = "";
-    private static ExpenseManagerResults expenseMngrResultObj = new ExpenseManagerResults();
+    private static ExpenseMngrResults expenseMngrResultObj = new ExpenseMngrResults();
     private DataPersisterToFileI dataPersisterObj;
 
-    private ExpenseManagerResults() {
+    private ExpenseMngrResults() {
     }
 
     /**
      * 
      * @return
      */
-    public static ResultsI getExpenseResultInstance() {
+    public static ExpenseResultsI getExpnseResInstance() {
         return expenseMngrResultObj;
     }
 
@@ -26,7 +26,7 @@ public class ExpenseManagerResults implements ResultsI, ResultPersisterI {
      * 
      * @return
      */
-    public static ResultPersisterI getExpenseResultPersisterInstance() {
+    public static ExpenseResultPersisterI getExpnseResPersistrInstance() {
         return expenseMngrResultObj;
     }
 
