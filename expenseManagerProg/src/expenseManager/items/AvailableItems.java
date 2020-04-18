@@ -41,21 +41,21 @@ public class AvailableItems implements AvailableItemsI {
      * The function processess each line of data from the file and stores it into a
      * HashMap
      * 
-     * @param availItemsFileProcessObj - FileProcessor object
+     * @param fileProcessorObj - FileProcessor object
      * 
      */
     @Override
-    public void processData(FileProcessorI availItemsFileProcessObj) {
+    public void storeFileData(FileProcessorI fileProcessorObj) {
 
         try {
-            while ((availItemData = availItemsFileProcessObj.readLine()) != null) {
+            while ((availItemData = fileProcessorObj.readLine()) != null) {
                 String[] keyValArr = availItemData.split(":");
                 insertData(keyValArr[0], keyValArr[1]);
             }
-            availItemsFileProcessObj.closeFile();
+            fileProcessorObj.closeFile();
         } catch (IOException e) {
             try {
-                availItemsFileProcessObj.closeFile();
+                fileProcessorObj.closeFile();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

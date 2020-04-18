@@ -17,7 +17,7 @@ public interface AvailableItemsI {
      * @param availItemsFileProcessObj - FileProcessor object
      * 
      */
-    public void processData(FileProcessorI availItemsFileProcessObj);
+    public void storeFileData(FileProcessorI availItemsFileProcessObj);
 
     /**
      * The function returns the available items data stored in the HashMap

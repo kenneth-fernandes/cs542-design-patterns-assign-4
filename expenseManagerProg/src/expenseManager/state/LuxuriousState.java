@@ -4,7 +4,7 @@ import java.util.List;
 
 import expenseManager.context.ExpenseManagerContextI;
 import expenseManager.items.AvailableItems;
-import expenseManager.results.ExpenseManagerResults;
+import expenseManager.results.ExpenseMngrResults;
 import expenseManager.util.input.ExpenseManagerInput;
 
 /**
@@ -31,7 +31,7 @@ public class LuxuriousState implements SpendingStateI {
     public void processItem(String item) {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
-            ExpenseManagerResults.getExpenseResultInstance().storeResults(
+            ExpenseMngrResults.getExpnseResInstance().storeResults(
                     "LUXURIOUS::" + item + "--" + (itemType.equals("moderatelyExpensive") || itemType
                             .equals("basic") ? "YES" : "NO"));
         }
@@ -52,7 +52,6 @@ public class LuxuriousState implements SpendingStateI {
             }
             expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
         }
-        System.out.println(expenseMngrCntxtObj.getRunAvgCreditAmount());
     }
 
     private void performStateChange() {
