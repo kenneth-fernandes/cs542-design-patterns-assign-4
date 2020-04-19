@@ -5,6 +5,8 @@ import java.util.List;
 import expenseManager.context.ExpenseMngrContextI;
 import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
+import expenseManager.state.stateprocessor.BasicStateProcessor;
+import expenseManager.state.stateprocessor.SpendingStateProcessorI;
 
 /**
  * BasicSpendingState
@@ -12,7 +14,7 @@ import expenseManager.results.ExpenseMngrResults;
 public class BasicState implements SpendingStateI {
 
     private ExpenseMngrContextI expenseMngrCntxtObj;
-    private BasicStateProcessor basicStatePrcsrObj;
+    private SpendingStateProcessorI basicStatePrcsrObj;
 
     public BasicState(ExpenseMngrContextI inExpenseMngrCntxtObj) {
         expenseMngrCntxtObj = inExpenseMngrCntxtObj;
@@ -25,6 +27,7 @@ public class BasicState implements SpendingStateI {
         moneyCreditList.add(amount);
         basicStatePrcsrObj.processSpendingState(moneyCreditList, expenseMngrCntxtObj.getRunAvgWinSize(),
                 expenseMngrCntxtObj);
+                
     }
 
     @Override

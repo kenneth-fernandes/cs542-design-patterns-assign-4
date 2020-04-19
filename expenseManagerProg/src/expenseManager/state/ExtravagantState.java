@@ -5,12 +5,14 @@ import java.util.List;
 import expenseManager.context.ExpenseMngrContextI;
 import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
+import expenseManager.state.stateprocessor.ExtravagantStateProcessor;
+import expenseManager.state.stateprocessor.SpendingStateProcessorI;
 
 public class ExtravagantState implements SpendingStateI {
 
     private ExpenseMngrContextI expenseMngrCntxtObj;
 
-    private ExtravagantStateProcessor extvgntStatePrcsrObj;
+    private SpendingStateProcessorI extvgntStatePrcsrObj;
 
     public ExtravagantState(ExpenseMngrContextI inExpenseMngrCntxtObj) {
         expenseMngrCntxtObj = inExpenseMngrCntxtObj;

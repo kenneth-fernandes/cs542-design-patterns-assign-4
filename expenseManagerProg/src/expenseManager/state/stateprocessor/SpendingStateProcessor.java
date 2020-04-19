@@ -1,18 +1,22 @@
-package expenseManager.state;
+package expenseManager.state.stateprocessor;
 
 import java.util.List;
 
 import expenseManager.context.ExpenseMngrContextI;
 
 public abstract class SpendingStateProcessor {
-    protected final void processSpendingState(List<Integer> moneyCreditList, int windowSize,
+    public final void processSpendingState(List<Integer> moneyCreditList, int windowSize,
             ExpenseMngrContextI expenseMngrCntxtObj) {
         performRunAvgCaln(moneyCreditList, windowSize, expenseMngrCntxtObj);
         performStateChange(expenseMngrCntxtObj);
 
     }
 
-    protected abstract String getIsPurchasableByItemType(String itemType);
+    public final String getIsPurchasableByItemType(String itemType) {
+        return isPurchasable(itemType);
+    }
+
+    protected abstract String isPurchasable(String itemType);
 
     private final void performStateChange(ExpenseMngrContextI expenseMngrCntxtObj) {
         Double avg = expenseMngrCntxtObj.getRunAvgCreditAmount();

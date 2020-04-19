@@ -5,6 +5,8 @@ import java.util.List;
 import expenseManager.context.ExpenseMngrContextI;
 import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
+import expenseManager.state.stateprocessor.LuxuriousStateProcessor;
+import expenseManager.state.stateprocessor.SpendingStateProcessorI;
 
 /**
  * LuxuriousSpendingState
@@ -13,7 +15,7 @@ public class LuxuriousState implements SpendingStateI {
 
     private ExpenseMngrContextI expenseMngrCntxtObj;
 
-    private LuxuriousStateProcessor luxStatePrcsrObj;
+    private SpendingStateProcessorI luxStatePrcsrObj;
 
     public LuxuriousState(ExpenseMngrContextI inExpenseMngrCntxtObj) {
         expenseMngrCntxtObj = inExpenseMngrCntxtObj;
