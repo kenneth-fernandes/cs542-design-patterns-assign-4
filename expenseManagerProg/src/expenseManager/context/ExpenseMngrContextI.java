@@ -4,7 +4,7 @@ import java.util.List;
 
 import expenseManager.state.SpendingStateI;
 
-public interface ExpenseManagerContextI {
+public interface ExpenseMngrContextI {
 
     public SpendingStateI getBasicState();
 
@@ -25,5 +25,7 @@ public interface ExpenseManagerContextI {
     public boolean getIsItemPurchasable();
 
     public void setItemPurchasableFlag(boolean flag);
+
+    public int getRunAvgWinSize();
 
 }

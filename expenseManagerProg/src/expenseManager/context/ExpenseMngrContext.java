@@ -8,7 +8,10 @@ import expenseManager.state.ExtravagantState;
 import expenseManager.state.LuxuriousState;
 import expenseManager.state.SpendingStateI;
 
-public class ExpenseManagerContext implements SpendingStateI, ExpenseManagerContextI {
+public class ExpenseMngrContext implements SpendingStateI, ExpenseMngrContextI {
+    //
+    private int runAvgWinSize;
+
     //
     private SpendingStateI basicStateObj;
     //
@@ -27,7 +30,8 @@ public class ExpenseManagerContext implements SpendingStateI, ExpenseManagerCont
     /**
      * 
      */
-    public ExpenseManagerContext() {
+    public ExpenseMngrContext(int inRunAvgWinSize) {
+        runAvgWinSize = inRunAvgWinSize;
 
         basicStateObj = new BasicState(this);
         luxuriousStateObj = new LuxuriousState(this);
@@ -83,6 +87,11 @@ public class ExpenseManagerContext implements SpendingStateI, ExpenseManagerCont
     @Override
     public Double getRunAvgCreditAmount() {
         return runAvgCreditAmount;
+    }
+
+    @Override
+    public int getRunAvgWinSize() {
+        return runAvgWinSize;
     }
 
     public void setRunAvgCreditAmount(Double avg) {

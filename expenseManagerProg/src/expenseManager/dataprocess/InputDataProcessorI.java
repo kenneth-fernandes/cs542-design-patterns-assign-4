@@ -1,4 +1,4 @@
-package expenseManager.util.dataprocess;
+package expenseManager.dataprocess;
 
 import expenseManager.state.SpendingStateI;
 import expenseManager.util.fileprocess.FileProcessorI;
