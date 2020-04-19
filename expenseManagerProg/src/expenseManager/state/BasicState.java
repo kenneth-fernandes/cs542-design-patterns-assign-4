@@ -2,28 +2,29 @@ package expenseManager.state;
 
 import java.util.List;
 
-import expenseManager.context.ExpenseManagerContextI;
+import expenseManager.context.ExpenseMngrContextI;
 import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
-import expenseManager.util.input.ExpenseManagerInput;
 
 /**
  * BasicSpendingState
  */
 public class BasicState implements SpendingStateI {
 
-    private ExpenseManagerContextI expenseMngrCntxtObj;
+    private ExpenseMngrContextI expenseMngrCntxtObj;
+    private BasicStateProcessor basicStatePrcsrObj;
 
-    public BasicState(ExpenseManagerContextI inExpenseMngrCntxtObj) {
+    public BasicState(ExpenseMngrContextI inExpenseMngrCntxtObj) {
         expenseMngrCntxtObj = inExpenseMngrCntxtObj;
+        basicStatePrcsrObj = BasicStateProcessor.getInstance();
     }
 
     @Override
     public void creditMoney(int amount) {
         List<Integer> moneyCreditList = expenseMngrCntxtObj.getMoneyCreditLst();
         moneyCreditList.add(amount);
-        performRunAvgCaln(moneyCreditList, ExpenseManagerInput.getInstance().getRunAvgWinSize());
-        performStateChange();
+        basicStatePrcsrObj.processSpendingState(moneyCreditList, expenseMngrCntxtObj.getRunAvgWinSize(),
+                expenseMngrCntxtObj);
     }
 
     @Override
@@ -31,36 +32,9 @@ public class BasicState implements SpendingStateI {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
             ExpenseMngrResults.getExpnseResInstance()
-                    .storeResults("BASIC::" + item + "--" + (itemType.equals("basic") ? "YES" : "NO"));
+                    .storeResults("BASIC::" + item + "--" + basicStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
 
-    }
-
-    private void performRunAvgCaln(List<Integer> moneyCreditList, int windowSize) {
-        int total = 0;
-        if (moneyCreditList.size() == windowSize) {
-            for (Integer money : moneyCreditList) {
-                total += money;
-            }
-            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / windowSize);
-            moneyCreditList.remove(0);
-        } else {
-            for (Integer money : moneyCreditList) {
-                total += money;
-            }
-            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
-        }
-    }
-
-    private void performStateChange() {
-        Double avg = expenseMngrCntxtObj.getRunAvgCreditAmount();
-        if (avg >= (double) 10000 && avg < (double) 50000) {
-            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getLuxuriousState());
-        } else if (avg >= (double) 50000) {
-            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getExtravagantState());
-        } else {
-            expenseMngrCntxtObj.setCurrentState(expenseMngrCntxtObj.getBasicState());
-        }
     }
 
 }

@@ -1,13 +1,13 @@
 package expenseManager.driver;
 
-import expenseManager.context.ExpenseManagerContext;
+import expenseManager.context.ExpenseMngrContext;
 import expenseManager.items.AvailableItems;
 import expenseManager.items.AvailableItemsI;
 import expenseManager.results.ExpenseMngrResults;
 import expenseManager.results.ExpenseResultPersisterI;
 import expenseManager.state.SpendingStateI;
-import expenseManager.util.dataprocess.InputDataProcessor;
-import expenseManager.util.dataprocess.InputDataProcessorI;
+import expenseManager.dataprocess.InputDataProcessorI;
+import expenseManager.dataprocess.InputDataProcessor;
 import expenseManager.util.fileprocess.FileProcessor;
 import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.input.ExpenseManagerInput;
@@ -56,7 +56,7 @@ public class Driver {
 
 			// Creating an object of ExpenseManagerContext for managing the expenses based
 			// on the input
-			SpendingStateI expnseMngrCntxt = new ExpenseManagerContext();
+			SpendingStateI expnseMngrCntxt = new ExpenseMngrContext(inputParamsObj.getRunAvgWinSize());
 
 			// Creating the FileProcessor object for Input file procession
 			FileProcessorI inputFileProcessObj = new FileProcessor(inputParamsObj.getInputFilePath());
