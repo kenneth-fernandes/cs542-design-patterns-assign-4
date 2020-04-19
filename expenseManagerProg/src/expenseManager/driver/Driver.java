@@ -12,6 +12,10 @@ import expenseManager.util.fileprocess.FileProcessor;
 import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.input.ExpenseManagerInput;
 import expenseManager.util.input.InputParametersI;
+import expenseManager.util.validator.ValidatorFetcher;
+import expenseManager.util.validator.ValidatorFetcherI;
+import expenseManager.util.validator.ValidatorUtil;
+import expenseManager.util.validator.ValidatorUtilI;
 
 /**
  * Driver class - The entry point of the program
@@ -37,6 +41,15 @@ public class Driver {
 
 				System.exit(0);
 			} else {
+
+				ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
+
+				ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
+
+				validatrUtilObj.validate("User-Input Error", validatrFetchrObj.inputFilePathValidatn(args[0]),
+						validatrFetchrObj.availItmFilePathValidatn(args[1]),
+						validatrFetchrObj.runAvgWinSizeValidatn(args[2]),
+						validatrFetchrObj.outputFilePathValidatn(args[3]));
 
 				inputParamsObj.setInputFilePath(args[0]);
 				inputParamsObj.setAvailableItemsFilePath(args[1]);
@@ -68,14 +81,13 @@ public class Driver {
 			// further processing
 			inputDataPrcsrObj.processData(inputFileProcessObj, expnseMngrCntxt);
 
-
 			// Retrieving the single instance of ExpenseMngrResults object.
 			ExpenseResultPersisterI expenseMngrResObj = ExpenseMngrResults.getExpnseResPersistrInstance();
 			// Storing the results to the file
 			expenseMngrResObj.storeResultToFile(inputParamsObj.getOutputFilePath());
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.printf(e.getMessage());
 		}
 
 	}
