@@ -8,7 +8,10 @@ import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
 
 /**
- * AvailableItemsI
+ * AvailableItemsI interface - Contains functions that processes data and stores
+ * available list of items based on its categories.
+ * 
+ * @author Kenneth Peter Fernandes
  */
 public interface AvailableItemsI {
 
@@ -16,17 +19,13 @@ public interface AvailableItemsI {
      * The function processess each line of data from the file and stores it into a
      * HashMap
      * 
-     * @param availItemsFileProcessObj - FileProcessor object
-     * 
-     */
-
-    /**
-     * The function processess each line of data from the file and stores it into a
-     * HashMap
-     * 
      * @param fileProcessorObj- FileProcessor object
-     * @throws InvalidAvailItemFileFormatException
-     * @throws IOException
+     * @throws InvalidAvailItemFileFormatException - User defined exception thrown
+     *                                             by validator for incorrect file
+     *                                             data format
+     * @throws IOException                         - Exception caused while
+     *                                             Input/Output thrown by the
+     *                                             function
      */
     public void storeFileData(FileProcessorI fileProcessorObj) throws InvalidAvailItemFileFormatException, IOException;
 
@@ -38,9 +37,10 @@ public interface AvailableItemsI {
     public HashMap<String, List<String>> getData();
 
     /**
-     * The function returns the key corressponding to which the item is stored
+     * The function returns theitem type key corressponding to which the item is
+     * stored
      * 
-     * @return - The key corressponding to which the item is stored
+     * @return - The item type corressponding to which the item is stored
      */
     public String getKeyByData(String itemData);
 

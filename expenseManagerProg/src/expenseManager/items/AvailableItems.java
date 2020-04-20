@@ -13,10 +13,11 @@ import expenseManager.util.validator.ValidatorUtilI;
 import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
 
 /**
- * The class AvailableItems processes data and stores available list of items
- * based on its categories
+ * AvailableItems class - Implements the functions of AvailableItemsI interface
+ * that processes data and stores available list of items based on its
+ * categories
  * 
- * @author Kenneth Fernandes
+ * @author Kenneth Peter Fernandes
  */
 public class AvailableItems implements AvailableItemsI {
     //
@@ -37,10 +38,9 @@ public class AvailableItems implements AvailableItemsI {
     }
 
     /**
-     * The static function returns the single instance of AvailableItems object of
-     * type AvailableItemsI
+     * Returns the AvailableItemsI interface for AvailableItems single instance
      * 
-     * @return - The AvailableItems object of type AvailableItemsI
+     * @return - AvailableItemsI interface for AvailableItems single instance
      */
     public static AvailableItemsI getInstance() {
         return availItemsObj;
@@ -50,9 +50,13 @@ public class AvailableItems implements AvailableItemsI {
      * The function processess each line of data from the file and stores it into a
      * HashMap
      * 
-     * @param fileProcessorObj - FileProcessor object
-     * @throws IOException
-     * 
+     * @param fileProcessorObj- FileProcessor object
+     * @throws InvalidAvailItemFileFormatException - User defined exception thrown
+     *                                             by validator for incorrect file
+     *                                             data format
+     * @throws IOException                         - Exception caused while
+     *                                             Input/Output thrown by the
+     *                                             function
      */
     @Override
     public void storeFileData(FileProcessorI fileProcessorObj) throws InvalidAvailItemFileFormatException, IOException {
@@ -107,9 +111,10 @@ public class AvailableItems implements AvailableItemsI {
     }
 
     /**
-     * The function returns the item stored in the HashMap corressponding to the key
+     * The function returns theitem type key corressponding to which the item is
+     * stored
      * 
-     * @return - The item stored in the HashMap corressponding to the key
+     * @return - The item type corressponding to which the item is stored
      */
     public String getKeyByData(String itemData) {
         for (String itemType : availItemsData.keySet()) {
