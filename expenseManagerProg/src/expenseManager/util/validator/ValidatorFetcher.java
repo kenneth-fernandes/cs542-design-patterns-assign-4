@@ -2,6 +2,8 @@ package expenseManager.util.validator;
 
 import java.io.File;
 
+import expenseManager.util.constants.ExceptionsConstants;
+
 /**
  * ValidatorFetcher class - Implements the ValidatorFetcherI interface functions
  * for performing validations
@@ -11,6 +13,8 @@ import java.io.File;
 public class ValidatorFetcher implements ValidatorFetcherI {
     // The variable hold the interface of ValidatorFetcher instance
     private static ValidatorFetcherI validatrFetchrObj = new ValidatorFetcher();
+    //
+    private ExceptionsConstants exceptionConsts;
 
     /**
      * The function returns the interface of ValidatorFetcher object's single
@@ -42,8 +46,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception("File path parameter, for retrieving the money earned and "
-                            + "items that can be purchased, is empty.");
+                    throw new Exception(ExceptionsConstants.INPUT_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -62,8 +65,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception("File path parameter, for retrieving the data of list of available items for"
-                            + " purchasing, is empty.");
+                    throw new Exception(ExceptionsConstants.AVAILABLE_ITEM_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -82,17 +84,17 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception("Window size parameter, for calculating the running average, is empty.");
+                    throw new Exception(ExceptionsConstants.WINDOW_SIZE_PARAMETER_EMPTY_ERROR_MSG.getErrorMsg());
                 } else {
                     try {
                         int value = Integer.parseInt(input);
                         if (value <= 0) {
                             throw new Exception(
-                                    "Window size parameter, for calculating the running average, entered is less than or equal to zero.");
+                                    ExceptionsConstants.WINDOW_SIZE_PARAMETER_NEGATIVE_VALUE_ERROR_MSG.getErrorMsg());
                         }
                     } catch (NumberFormatException e) {
                         throw new Exception(
-                                "Window size parameter, for calculating the running average entered, is an invalid integer value.");
+                                ExceptionsConstants.WINDOW_SIZE_PARAMETER_INVALID_FORMAT_ERROR_MSG.getErrorMsg());
                     }
 
                 }
@@ -173,7 +175,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
                             + "be purchased, is blank or empty.");
                 } else if (!data.matches("^[a-z]+:[a-zA-Z0-9\\W]+") && !data.matches("^[a-z]+:[0-9]+")) {
                     throw new Exception(
-                            "1The data read from the input file, having money and items that can be purchased, "
+                            "The data read from the input file, having money and items that can be purchased, "
                                     + "is not in correct format.");
                 } else if (!data.split(":")[0].equals("item") && !data.split(":")[0].equals("money")) {
                     throw new Exception(
