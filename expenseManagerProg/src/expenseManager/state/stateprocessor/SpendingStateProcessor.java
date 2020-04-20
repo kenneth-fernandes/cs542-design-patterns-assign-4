@@ -4,7 +4,7 @@ import java.util.List;
 
 import expenseManager.context.ExpenseMngrContextI;
 
-public abstract class SpendingStateProcessor implements SpendingStateProcessorI {
+public abstract class SpendingStateProcessor  {
     public final void processSpendingState(List<Integer> moneyCreditList, int windowSize,
             ExpenseMngrContextI expenseMngrCntxtObj) {
         performRunAvgCaln(moneyCreditList, windowSize, expenseMngrCntxtObj);
@@ -36,12 +36,14 @@ public abstract class SpendingStateProcessor implements SpendingStateProcessorI 
             for (Integer money : moneyCreditList) {
                 total += money;
             }
+            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
             moneyCreditList.remove(0);
         } else {
             for (Integer money : moneyCreditList) {
                 total += money;
             }
+            expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
         }
-        expenseMngrCntxtObj.setRunAvgCreditAmount((double) total / moneyCreditList.size());
+        
     }
 }
