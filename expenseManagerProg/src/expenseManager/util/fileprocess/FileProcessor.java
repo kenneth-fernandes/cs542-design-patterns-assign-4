@@ -10,6 +10,7 @@ import expenseManager.util.validator.ValidatorFetcher;
 import expenseManager.util.validator.ValidatorFetcherI;
 import expenseManager.util.validator.ValidatorUtil;
 import expenseManager.util.validator.ValidatorUtilI;
+import expenseManager.util.validator.expception.FileNotProcessedException;
 
 /**
  * The class FileProcessor performs file related operations.
@@ -33,10 +34,10 @@ public class FileProcessor implements FileProcessorI {
 	 * @param filePath - Path of the file to be read
 	 * @throws Exception
 	 */
-	public FileProcessor(String filePath) throws Exception {
+	public FileProcessor(String filePath) throws FileNotProcessedException, FileNotFoundException {
 		try {
-			file = new File(filePath);
-			validatrUtilObj.validate("Input file Error", validatrFetchrObj.inputFileValidatn(file));
+			validatrUtilObj.validateFileProcessor("Input-file Error",
+					validatrFetchrObj.inputFileEmptyValidatn(file = new File(filePath)));
 			br = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			throw e;

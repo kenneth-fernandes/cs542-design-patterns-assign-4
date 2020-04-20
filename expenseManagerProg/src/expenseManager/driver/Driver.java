@@ -1,5 +1,7 @@
 package expenseManager.driver;
 
+import java.io.IOException;
+
 import expenseManager.context.ExpenseMngrContext;
 import expenseManager.items.AvailableItems;
 import expenseManager.items.AvailableItemsI;
@@ -16,6 +18,10 @@ import expenseManager.util.validator.ValidatorFetcher;
 import expenseManager.util.validator.ValidatorFetcherI;
 import expenseManager.util.validator.ValidatorUtil;
 import expenseManager.util.validator.ValidatorUtilI;
+import expenseManager.util.validator.expception.FileNotProcessedException;
+import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
+import expenseManager.util.validator.expception.InvalidInputFileFormatException;
+import expenseManager.util.validator.expception.InvalidInputParamsException;
 
 /**
  * Driver class - The entry point of the program
@@ -46,7 +52,8 @@ public class Driver {
 
 				ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
 
-				validatrUtilObj.validate("User-Input Error", validatrFetchrObj.inputFilePathValidatn(args[0]),
+				validatrUtilObj.validateInputParams("User-Input Error",
+						validatrFetchrObj.inputFilePathValidatn(args[0]),
 						validatrFetchrObj.availItmFilePathValidatn(args[1]),
 						validatrFetchrObj.runAvgWinSizeValidatn(args[2]),
 						validatrFetchrObj.outputFilePathValidatn(args[3]));
@@ -86,7 +93,10 @@ public class Driver {
 			// Storing the results to the file
 			expenseMngrResObj.storeResultToFile(inputParamsObj.getOutputFilePath());
 
-		} catch (Exception e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (FileNotProcessedException | InvalidInputParamsException | InvalidInputFileFormatException
+				| InvalidAvailItemFileFormatException e) {
 			System.err.printf(e.getMessage());
 		}
 

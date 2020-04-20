@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import expenseManager.util.fileprocess.FileProcessorI;
+import expenseManager.util.validator.ValidatorFetcher;
+import expenseManager.util.validator.ValidatorFetcherI;
+import expenseManager.util.validator.ValidatorUtil;
+import expenseManager.util.validator.ValidatorUtilI;
+import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
 
 /**
  * The class AvailableItems processes data and stores available list of items
@@ -20,6 +25,10 @@ public class AvailableItems implements AvailableItemsI {
     private HashMap<String, List<String>> availItemsData = new HashMap<>();
     //
     private String availItemData;
+    //
+    ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
+    //
+    ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
 
     /**
      * AvailableItems private constructor
@@ -42,24 +51,27 @@ public class AvailableItems implements AvailableItemsI {
      * HashMap
      * 
      * @param fileProcessorObj - FileProcessor object
+     * @throws IOException
      * 
      */
     @Override
-    public void storeFileData(FileProcessorI fileProcessorObj) {
+    public void storeFileData(FileProcessorI fileProcessorObj) throws InvalidAvailItemFileFormatException, IOException {
 
         try {
             while ((availItemData = fileProcessorObj.readLine()) != null) {
+                validatrUtilObj.validateAvailItemFileData("Available Items data processing error",
+                        validatrFetchrObj.availItmFileFormatValidn(availItemData));
                 String[] keyValArr = availItemData.split(":");
                 insertData(keyValArr[0], keyValArr[1]);
             }
             fileProcessorObj.closeFile();
-        } catch (IOException e) {
+        } catch (IOException | InvalidAvailItemFileFormatException e) {
             try {
                 fileProcessorObj.closeFile();
             } catch (IOException e1) {
-                e1.printStackTrace();
+                throw e1;
             }
-            e.printStackTrace();
+            throw e;
         }
     }
 

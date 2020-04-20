@@ -43,7 +43,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
                     throw new Exception("File path parameter, for retrieving the money earned and "
-                            + "items that can be purchased, is empty");
+                            + "items that can be purchased, is empty.");
                 }
             }
         };
@@ -63,7 +63,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
                     throw new Exception("File path parameter, for retrieving the data of list of available items for"
-                            + " purchasing, is empty");
+                            + " purchasing, is empty.");
                 }
             }
         };
@@ -101,7 +101,8 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the function performs validation of output filepath parameter
+     * The implementation of the function performs validation of output filepath
+     * parameter
      * 
      * @param input - The input parameter entered for output file-path
      * @return - The implemented interface ValidatorI performing the output filepath
@@ -113,7 +114,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
                     throw new Exception("File path parameter, for storing the final outcome mentioning the "
-                            + "purchasable/ non-purchasable items along with the spending state, is empty");
+                            + "purchasable/ non-purchasable items along with the spending state, is empty.");
                 }
             }
         };
@@ -122,15 +123,73 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     /**
      * The implementation of the
      * 
-     * @param input -
+     * @param file -
      * @return -
      */
-    public ValidatorI inputFileValidatn(File file) {
+    public ValidatorI inputFileEmptyValidatn(File file) {
         return new ValidatorI() {
             @Override
             public void run() throws Exception {
                 if (file.length() == 0) {
-                    throw new Exception("The input file or the available items list file is empty");
+                    throw new Exception("The input file or the available items list file is empty.");
+                }
+            }
+        };
+    }
+
+    /**
+     * @param data -
+     * @return -
+     */
+    public ValidatorI availItmFileFormatValidn(String data) {
+        return new ValidatorI() {
+            @Override
+            public void run() throws Exception {
+                if (data.isBlank() || data.isEmpty()) {
+                    throw new Exception("The data read from the available items file is blank or empty.");
+                } else if (!data.matches("^[a-z]+[a-zA-Z]*:[a-z]+[a-zA-Z0-9]*")) {
+                    throw new Exception(data + "The data read from the available items file is not in correct format.");
+                } else if (!data.split(":")[0].equals("basic") && !data.split(":")[0].equals("moderatelyExpensive")
+                        && !data.split(":")[0].equals("superExpensive")) {
+                    throw new Exception("The data read from the available items file is not in correct format.");
+                } else if (data.matches("basic:[0-9]+") || data.matches("moderatelyExpensive:[0-9]+")
+                        || data.matches("superExpensive:[0-9]+")) {
+                    throw new Exception("The data read from the available items file has a numeric item name.");
+                }
+            }
+        };
+    }
+
+    /**
+     * @param data -
+     * @return -
+     */
+    public ValidatorI inputFileFormatValidn(String data) {
+        return new ValidatorI() {
+            @Override
+            public void run() throws Exception {
+                if (data.isBlank() || data.isEmpty()) {
+                    throw new Exception("The data read from the input file, having money and items that can "
+                            + "be purchased, is blank or empty.");
+                } else if (!data.matches("^[a-z]+:[a-z]+[a-zA-Z0-9]*") && !data.matches("^[a-z]+:[0-9]+")) {
+                    throw new Exception(
+                            "1The data read from the input file, having money and items that can be purchased, "
+                                    + "is not in correct format.");
+                } else if (!data.split(":")[0].equals("item") && !data.split(":")[0].equals("money")) {
+                    throw new Exception(
+                            "The data read from the input file, having money and items that can be purchased, "
+                                    + "is not in correct format.");
+                } else if (data.split(":")[0].equals("money")) {
+                    try {
+                        int num = Integer.parseInt(data.split("money:")[1]);
+                        if (num <= 0)
+                            throw new Exception("The data read from the input file, having money and items that "
+                                    + "can be purchased, has money earned as less than or equal to zero.");
+                    } catch (NumberFormatException e) {
+                        throw new Exception("The money data read from the input file, having money and items that "
+                                + "can be purchased, has a invalid integer value.");
+                    }
+
                 }
             }
         };

@@ -1,9 +1,11 @@
 package expenseManager.items;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import expenseManager.util.fileprocess.FileProcessorI;
+import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
 
 /**
  * AvailableItemsI
@@ -17,7 +19,16 @@ public interface AvailableItemsI {
      * @param availItemsFileProcessObj - FileProcessor object
      * 
      */
-    public void storeFileData(FileProcessorI availItemsFileProcessObj);
+
+    /**
+     * The function processess each line of data from the file and stores it into a
+     * HashMap
+     * 
+     * @param fileProcessorObj- FileProcessor object
+     * @throws InvalidAvailItemFileFormatException
+     * @throws IOException
+     */
+    public void storeFileData(FileProcessorI fileProcessorObj) throws InvalidAvailItemFileFormatException, IOException;
 
     /**
      * The function returns the available items data stored in the HashMap

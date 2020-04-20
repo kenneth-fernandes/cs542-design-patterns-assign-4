@@ -52,6 +52,20 @@ public interface ValidatorFetcherI {
      * @param input
      * @return
      */
-    public ValidatorI inputFileValidatn(File file);
+    public ValidatorI inputFileEmptyValidatn(File file);
+
+    /**
+     * 
+     * @param data
+     * @return
+     */
+    public ValidatorI availItmFileFormatValidn(String data);
+
+    /**
+     * 
+     * @param data
+     * @return
+     */
+    public ValidatorI inputFileFormatValidn(String data);
 
 }
