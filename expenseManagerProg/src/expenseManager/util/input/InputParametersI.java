@@ -4,7 +4,7 @@ package expenseManager.util.input;
  * InputParametersI interface - Contains methods for storing and retrieving
  * command line arguments passed to the application
  * 
- * @author Kenneth Fernandes
+ * @author Kenneth Peter Fernandes
  */
 public interface InputParametersI {
 

@@ -1,28 +1,37 @@
 package expenseManager.util.input;
 
+/**
+ * ExpenseManagerInput class - Implements the methods of InputParametersI
+ * interface used for storing and retrieving command line arguments passed to
+ * the application
+ * 
+ * @author Kenneth Peter Fernandes
+ */
 public class ExpenseManagerInput implements InputParametersI {
-    //
+    // Stores the InputParametersI interface for ExpenseManagerInput instance
     private static InputParametersI expenseInputParamObj = new ExpenseManagerInput();
-    //
+    // Stores the input text file path where the money earned and item to be
+    // purchased is listed
     private String inputFilePath;
-    //
+    // Stores the available items text file path where the list of items are present
+    // with the type of the cost category
     private String availableItemsFilePath;
-    //
+    // Stores the window size used for running average calculation
     private int runAvgWinSize;
-    //
+    // Stores the output text file path where the outcome is stored
     private String outputFilePath;
 
-    //
+    /**
+     * Intializing the flags to false which are used to check if the input
+     * parameters are set or not in order to avoid overriting
+     */
     private boolean isInputFilePathSet = false;
-    //
     private boolean isAvailItemsFilePathSet = false;
-    //
     private boolean isRunAvgWinSizeSet = false;
-    //
     private boolean isOutputFilePathSet = false;
 
     /**
-     * ExpenseManagerInput class private constructor
+     * Private ExpenseManagerInput class empty constructor
      */
     private ExpenseManagerInput() {
     }
