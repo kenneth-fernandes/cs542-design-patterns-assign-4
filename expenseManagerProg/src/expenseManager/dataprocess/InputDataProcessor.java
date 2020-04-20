@@ -47,7 +47,7 @@ public class InputDataProcessor implements InputDataProcessorI {
                         validatrFetchrObj.inputFileFormatValidn(lineData));
                 String[] keyValPairArr = lineData.split(":");
                 if (isItemData(keyValPairArr[0]))
-                    context.processItem(keyValPairArr[1]);
+                    context.processItemPuchasability(keyValPairArr[1]);
 
                 if (isMoneyData(keyValPairArr[0]))
                     context.creditMoney(Integer.parseInt(keyValPairArr[1]));
