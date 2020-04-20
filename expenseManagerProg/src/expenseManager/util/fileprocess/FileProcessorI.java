@@ -3,7 +3,7 @@ package expenseManager.util.fileprocess;
 import java.io.IOException;
 
 /**
- * FileProcessorI interface
+ * FileProcessorI interface - Contains methods that performs file processing
  * 
  * @author Kenneth Fernandes
  */
@@ -19,10 +19,11 @@ public interface FileProcessorI {
 
 
 	/**
-	 * This is a function is for closing the file
-	 * 
-	 * @throws IOException
-	 */
+     * This is a function is for closing the file
+     * 
+     * @throws IOException - Exception caused while Input/Output thrown by the
+     *                     function
+     */
 	public void closeFile() throws IOException;
 
 }

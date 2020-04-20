@@ -13,9 +13,10 @@ import expenseManager.util.validator.ValidatorUtilI;
 import expenseManager.util.validator.expception.FileNotProcessedException;
 
 /**
- * The class FileProcessor performs file related operations.
+ * FileProcessor class - Implements FileProcessorI interface functions that
+ * performs file related operations.
  * 
- * @author Kenneth Fernandes
+ * @author Kenneth Peter Fernandes
  */
 public class FileProcessor implements FileProcessorI {
 
@@ -32,7 +33,16 @@ public class FileProcessor implements FileProcessorI {
 	 * The FileProcessor constructor that initializes Buffered Reader with filepath
 	 * 
 	 * @param filePath - Path of the file to be read
-	 * @throws Exception
+	 * @throws ExceptionException - caused while Input/Output thrown by the function
+	 */
+	/**
+	 * The FileProcessor constructor that initializes Buffered Reader with filepath
+	 * 
+	 * @param filePath - Path of the file to be read
+	 * @throws FileNotProcessedException - User defined exception thrown by
+	 *                                   validator for file processing error
+	 * @throws FileNotFoundException     - Exception caused while Input/Output
+	 *                                   thrown by the function
 	 */
 	public FileProcessor(String filePath) throws FileNotProcessedException, FileNotFoundException {
 		try {
@@ -58,7 +68,8 @@ public class FileProcessor implements FileProcessorI {
 	/**
 	 * This is a function is for closing the file
 	 * 
-	 * @throws IOException
+	 * @throws IOException - Exception caused while Input/Output thrown by the
+	 *                     function
 	 */
 	public void closeFile() throws IOException {
 		try {
