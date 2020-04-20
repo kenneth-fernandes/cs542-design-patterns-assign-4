@@ -7,31 +7,43 @@ import expenseManager.util.persister.DataPersisterToFile;
 import expenseManager.util.persister.DataPersisterToFileI;
 
 public class ExpenseMngrResults implements ExpenseResultsI, ExpenseResultPersisterI {
+    // Stores the final result that has to persisted to the output file
     private String expenseResults = "";
+    // Stores the ExpenseMngrResults instance
     private static ExpenseMngrResults expenseMngrResultObj = new ExpenseMngrResults();
+    // Stores the interface DataPersisterToFileI for DataPersisterToFile instance
     private DataPersisterToFileI dataPersisterObj;
 
+    /**
+     * Private ExpenseMngrResultsclass empty constructor
+     */
     private ExpenseMngrResults() {
     }
 
     /**
+     * Returns the ExpenseResultsI interface for ExpenseMngrResults single instance
      * 
-     * @return
+     * @return - ExpenseResultsI interface for ExpenseMngrResults single instance
      */
     public static ExpenseResultsI getExpnseResInstance() {
         return expenseMngrResultObj;
     }
 
     /**
+     * Returns the ExpenseResultPersisterI interface for ExpenseMngrResults single
+     * instance
      * 
-     * @return
+     * @return - ExpenseResultPersisterI interface for ExpenseMngrResults single
+     *         instance
      */
     public static ExpenseResultPersisterI getExpnseResPersistrInstance() {
         return expenseMngrResultObj;
     }
 
     /**
+     * Stores the result to data-structure
      * 
+     * @param resultData - Result data
      */
     @Override
     public void storeResults(String resultData) {
@@ -39,9 +51,15 @@ public class ExpenseMngrResults implements ExpenseResultsI, ExpenseResultPersist
     }
 
     /**
-     * @throws IOException
-     * @throws FileNotFoundException
+     * Store the result captured in the data-structure to the output file
      * 
+     * @param filePath - Output file path
+     * @throws FileNotFoundException - Exception caused while Input/Output thrown by
+     *                               the function
+     *
+     * @throws IOException           - Exception caused while Input/Output thrown by
+     *                               the function
+     *
      */
     @Override
     public void storeResultToFile(String filePath) throws FileNotFoundException, IOException {

@@ -3,7 +3,9 @@ package expenseManager.util.persister;
 import java.io.IOException;
 
 /**
- * DataPersisterToFileI
+ * DataPersisterToFileI interface - Contains functions for writing data to file
+ * 
+ * @author Kenneth Peter Fernandes
  */
 public interface DataPersisterToFileI {
     /**
@@ -17,7 +19,8 @@ public interface DataPersisterToFileI {
      * This function closes the file connection and flushes the buffrdWriter to the
      * file
      * 
-     * @throws IOException
+     * @throws IOException - Exception caused while Input/Output thrown by the
+     *                     function
      */
     public void closeFile() throws IOException;
 

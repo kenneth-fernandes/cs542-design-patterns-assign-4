@@ -6,6 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * DataPersisterToFile class - Implements the DataPersisterToFileI interface
+ * functions for writing data to file
+ * 
+ * @author Kenneth Peter Fernandes
+ */
 public class DataPersisterToFile implements DataPersisterToFileI {
 
     // Stores the BufferedWriter instance
@@ -18,7 +24,13 @@ public class DataPersisterToFile implements DataPersisterToFileI {
     private FileWriter fileWriter;
 
     /**
-     * DataPersisterToFile constructor
+     * DataPersisterToFile constructor that intializes fileWriter and bufferedWriter
+     * 
+     * @param filePath - Output file path
+     * @throws FileNotFoundException - Exception caused while Input/Output thrown by
+     *                               the function
+     * @throws IOException           - Exception caused while Input/Output thrown by
+     *                               the function
      */
     public DataPersisterToFile(String filePath) throws FileNotFoundException, IOException {
         try {
@@ -46,7 +58,8 @@ public class DataPersisterToFile implements DataPersisterToFileI {
      * This function closes the file connection and flushes the buffrdWriter to the
      * file
      * 
-     * @throws IOException
+     * @throws IOException - Exception caused while Input/Output thrown by the
+     *                     function
      */
     public void closeFile() throws IOException {
         try {
@@ -60,7 +73,7 @@ public class DataPersisterToFile implements DataPersisterToFileI {
 
     @Override
     public String toString() {
-        return "PersistToFile : (buffrdWriter=" + buffrdWriter + ", file = " + file + ", fileWriter ="
-                + fileWriter + ")";
+        return "PersistToFile : (buffrdWriter=" + buffrdWriter + ", file = " + file + ", fileWriter =" + fileWriter
+                + ")";
     }
 }
