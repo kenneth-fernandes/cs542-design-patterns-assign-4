@@ -12,16 +12,30 @@ import expenseManager.state.stateprocessor.SpendingStateProcessorI;
  * LuxuriousSpendingState
  */
 public class LuxuriousState implements SpendingStateI {
-
+    // Stores the interface of ExpenseMngrContextI for ExpenseMngrContext instance
     private ExpenseMngrContextI expenseMngrCntxtObj;
-
+    // Stores the interface of SpendingStateProcessorI for LuxuriousStateProcessor
+    // instance
     private SpendingStateProcessorI luxStatePrcsrObj;
 
+    /**
+     * LuxuriousState constructor - Intializes the variables holding
+     * ExpenseMngrContextI interface and SpendingStateProcessorI interface
+     * 
+     * @param inExpenseMngrCntxtObj - ExpenseMngrContextI interface for
+     *                              ExpenseMngrContext instance
+     */
     public LuxuriousState(ExpenseMngrContextI inExpenseMngrCntxtObj) {
         expenseMngrCntxtObj = inExpenseMngrCntxtObj;
         luxStatePrcsrObj = LuxuriousStateProcessor.getInstance();
     }
 
+    /**
+     * Credits the amount in the money credit list and internally performs
+     * calculation to find out the spending state
+     * 
+     * @param amount - The amount provided by the user through the input file
+     */
     @Override
     public void creditMoney(int amount) {
         List<Integer> moneyCreditList = expenseMngrCntxtObj.getMoneyCreditLst();
@@ -31,12 +45,18 @@ public class LuxuriousState implements SpendingStateI {
 
     }
 
+    /**
+     * Processes the item provided by the user through input file which internally
+     * checks whether item can be purchased based on the current spending state
+     * 
+     * @param item - The item provided by the user through the input file
+     */
     @Override
-    public void processItem(String item) {
+    public void processItemPuchasability(String item) {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
-            ExpenseMngrResults.getExpnseResInstance().storeResults("LUXURIOUS::" + item + "--"
-                    + luxStatePrcsrObj.getIsPurchasableByItemType(itemType));
+            ExpenseMngrResults.getExpnseResInstance()
+                    .storeResults("LUXURIOUS::" + item + "--" + luxStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
     }
 
