@@ -147,8 +147,8 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             public void run() throws Exception {
                 if (data.isBlank() || data.isEmpty()) {
                     throw new Exception("The data read from the available items file is blank or empty.");
-                } else if (!data.matches("^[a-z]+[a-zA-Z]*:[a-z]+[a-zA-Z0-9]*")) {
-                    throw new Exception(data + "The data read from the available items file is not in correct format.");
+                } else if (!data.matches("^[a-z]+[a-zA-Z]*:[a-zA-Z0-9\\W]+")) {
+                    throw new Exception("The data read from the available items file is not in correct format.");
                 } else if (!data.split(":")[0].equals("basic") && !data.split(":")[0].equals("moderatelyExpensive")
                         && !data.split(":")[0].equals("superExpensive")) {
                     throw new Exception("The data read from the available items file is not in correct format.");
@@ -171,7 +171,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
                 if (data.isBlank() || data.isEmpty()) {
                     throw new Exception("The data read from the input file, having money and items that can "
                             + "be purchased, is blank or empty.");
-                } else if (!data.matches("^[a-z]+:[a-z]+[a-zA-Z0-9]*") && !data.matches("^[a-z]+:[0-9]+")) {
+                } else if (!data.matches("^[a-z]+:[a-zA-Z0-9\\W]+") && !data.matches("^[a-z]+:[0-9]+")) {
                     throw new Exception(
                             "1The data read from the input file, having money and items that can be purchased, "
                                     + "is not in correct format.");
