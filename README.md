@@ -6,7 +6,7 @@
 
 Following are the commands and the instructions to run ANT on your project.
 
-#### Note: build.xml is present in expenseManager/src folder.
+#### Note: build.xml is present in expenseManagerProg/src folder.
 
 ---
 
