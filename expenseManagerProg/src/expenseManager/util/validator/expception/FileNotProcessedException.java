@@ -20,5 +20,10 @@ public class FileNotProcessedException extends Exception {
     public FileNotProcessedException(String s) {
         super(s);
     }
+
+    @Override
+    public String toString() {
+        return "Class: FileNotProcessedException, Data Members: [ ]";
+    }
 }
 

@@ -64,4 +64,10 @@ public class LuxuriousState implements SpendingStateI {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Class: LuxuriousState, Data Members: [ expenseMngrCntxtObj: " + expenseMngrCntxtObj.toString()
+                + ", luxStatePrcsrObj: " + luxStatePrcsrObj.toString() + "]";
+    }
+
 }

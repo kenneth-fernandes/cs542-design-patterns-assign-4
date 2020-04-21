@@ -143,4 +143,13 @@ public class ExpenseManagerInput implements InputParametersI {
         return outputFilePath;
     }
 
+    @Override
+    public String toString() {
+        return "Class:FileProcessor, Data Members: [expenseInputParamObj:" + expenseInputParamObj.toString()
+                + ", inputFilePath: " + inputFilePath + ", availableItemsFilePath: " + availableItemsFilePath
+                + ", runAvgWinSize: " + runAvgWinSize + ", outputFilePath: " + outputFilePath + ", isInputFilePathSet:"
+                + isInputFilePathSet + ", isAvailItemsFilePathSet: " + isAvailItemsFilePathSet
+                + ", isRunAvgWinSizeSet: " + isRunAvgWinSizeSet + ", isOutputFilePathSet: " + isOutputFilePathSet + "]";
+    }
+
 }

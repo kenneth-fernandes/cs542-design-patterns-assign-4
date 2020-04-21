@@ -91,4 +91,11 @@ public abstract class SpendingStateProcessor {
         }
 
     }
+
+    @Override
+    public String toString() {
+
+        return "Class: SpendingStateProcessor";
+    }
+
 }

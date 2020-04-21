@@ -25,7 +25,7 @@ public class AvailableItems implements AvailableItemsI {
     // Stores the AvailableItemsI interface for AvailableItems instance
     private static AvailableItemsI availItemsObj = new AvailableItems();
     // Stores the list of type of item and item name
-    private HashMap<String, List<String>> availItemsData = new HashMap<>();
+    private HashMap<String, List<String>> availItemsDataHMap = new HashMap<>();
     // Stores the current line data processed from the Available Items file
     private String availItemData;
     // Stores the interface of ValidatorUtilI for ValidatorUtil instance
@@ -69,7 +69,7 @@ public class AvailableItems implements AvailableItemsI {
                         ExceptionConstants.AVAILABLE_ITEMS_DATA_PROCESSING_ERROR_MSG.getErrorMsg(),
                         validatrFetchrObj.availItmFileFormatValidn(availItemData));
                 String[] keyValArr = availItemData.split(UtilConstants.COLON_CHAR.getConstantValue());
-                insertData(keyValArr[0], keyValArr[1]);
+                insertData(keyValArr[0].trim(), keyValArr[1].trim());
             }
             fileProcessorObj.closeFile();
         } catch (IOException | InvalidAvailItemFileFormatException e) {
@@ -88,7 +88,7 @@ public class AvailableItems implements AvailableItemsI {
      * @return - HashMap object that stores the available items
      */
     public HashMap<String, List<String>> getData() {
-        return availItemsData;
+        return availItemsDataHMap;
     }
 
     /**
@@ -101,14 +101,14 @@ public class AvailableItems implements AvailableItemsI {
      */
     private void insertData(String key, String value) {
         List<String> lst;
-        if (availItemsData.containsKey(key)) {
-            lst = availItemsData.get(key);
+        if (availItemsDataHMap.containsKey(key)) {
+            lst = availItemsDataHMap.get(key);
             lst.add(value);
-            availItemsData.put(key, lst);
+            availItemsDataHMap.put(key, lst);
         } else {
             lst = new ArrayList<>();
             lst.add(value);
-            availItemsData.put(key, lst);
+            availItemsDataHMap.put(key, lst);
         }
 
     }
@@ -120,8 +120,8 @@ public class AvailableItems implements AvailableItemsI {
      * @return - The item type corressponding to which the item is stored
      */
     public String getKeyByData(String itemData) {
-        for (String itemType : availItemsData.keySet()) {
-            for (String item : availItemsData.get(itemType)) {
+        for (String itemType : availItemsDataHMap.keySet()) {
+            for (String item : availItemsDataHMap.get(itemType)) {
                 if (itemData.equals(item)) {
                     return itemType;
                 }
@@ -132,7 +132,9 @@ public class AvailableItems implements AvailableItemsI {
 
     @Override
     public String toString() {
-        return "Class - AvailableItems : []";
+        return "Class: AvailableItems, [ availItemsObj: " + availItemsObj.toString() + ", availItemsDataHMap: "
+                + availItemsDataHMap.toString() + ", availItemData: " + availItemData + ", validatrUtilObj:"
+                + validatrUtilObj.toString() + ", validatrFetchrObj:" + validatrFetchrObj.toString() + "]";
     }
 
 }

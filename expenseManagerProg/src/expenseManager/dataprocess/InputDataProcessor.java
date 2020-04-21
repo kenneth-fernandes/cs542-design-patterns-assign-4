@@ -66,11 +66,11 @@ public class InputDataProcessor implements InputDataProcessorI {
                         ExceptionConstants.INPUT_FILE_DATA_PROCESSING_ERROR_MSG.getErrorMsg(),
                         validatrFetchrObj.inputFileFormatValidn(lineData));
                 String[] keyValPairArr = lineData.split(UtilConstants.COLON_CHAR.getConstantValue());
-                if (isItemData(keyValPairArr[0]))
-                    context.processItemPuchasability(keyValPairArr[1]);
+                if (isItemData(keyValPairArr[0].trim()))
+                    context.processItemPuchasability(keyValPairArr[1].trim());
 
-                if (isMoneyData(keyValPairArr[0]))
-                    context.creditMoney(Integer.parseInt(keyValPairArr[1]));
+                if (isMoneyData(keyValPairArr[0].trim()))
+                    context.creditMoney(Integer.parseInt(keyValPairArr[1].trim()));
             }
             fileProcessorObj.closeFile();
         } catch (IOException e) {
@@ -101,6 +101,13 @@ public class InputDataProcessor implements InputDataProcessorI {
      */
     private boolean isMoneyData(String data) {
         return data.toLowerCase().trim().equals("money");
+    }
+
+    @Override
+    public String toString() {
+        return "Class: InputDataProcessor, Data Members: [lineData: " + lineData + ", inputDataPrcsrObj: "
+                + inputDataPrcsrObj.toString() + ", validatrUtilObj: " + validatrUtilObj.toString()
+                + ", validatrFetchrObj: " + validatrFetchrObj.toString() + "]";
     }
 
 }

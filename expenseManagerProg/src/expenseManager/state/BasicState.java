@@ -68,4 +68,10 @@ public class BasicState implements SpendingStateI {
 
     }
 
+    @Override
+    public String toString() {
+        return "Class: BasicState, Data Members: [ expenseMngrCntxtObj: " + expenseMngrCntxtObj.toString()
+                + ", basicStatePrcsrObj: " + basicStatePrcsrObj.toString() + "]";
+    }
+
 }

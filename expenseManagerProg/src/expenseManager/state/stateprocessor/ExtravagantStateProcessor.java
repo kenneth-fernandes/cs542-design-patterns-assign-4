@@ -41,4 +41,11 @@ public class ExtravagantStateProcessor extends SpendingStateProcessor implements
                         ? UtilConstants.YES.getConstantValue()
                         : UtilConstants.NO.getConstantValue();
     }
+
+    @Override
+    public String toString() {
+
+        return "Class: ExtravagantStateProcessor, Data Members: [ extvgntStatePrcsrObj: "
+                + extvgntStatePrcsrObj.toString() + "]";
+    }
 }

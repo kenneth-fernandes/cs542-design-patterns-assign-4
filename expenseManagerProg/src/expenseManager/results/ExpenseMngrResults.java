@@ -71,6 +71,8 @@ public class ExpenseMngrResults implements ExpenseResultsI, ExpenseResultPersist
 
     @Override
     public String toString() {
-        return "Class - ExpenseManagerResults | Data members []";
+        return "Class: ExpenseManagerResults, Data members [ expenseResults: " + expenseResults
+                + ", expenseMngrResultObj: " + expenseMngrResultObj.toString() + ", dataPersisterObj:"
+                + dataPersisterObj.toString() + "]";
     }
 }

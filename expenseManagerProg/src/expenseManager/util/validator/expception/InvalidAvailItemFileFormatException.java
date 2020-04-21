@@ -20,4 +20,9 @@ public class InvalidAvailItemFileFormatException extends Exception{
     public InvalidAvailItemFileFormatException(String s) {
         super(s);
     }
+
+    @Override
+    public String toString() {
+        return "Class: InvalidAvailItemFileFormatException, Data Members: [ ]";
+    }
 }

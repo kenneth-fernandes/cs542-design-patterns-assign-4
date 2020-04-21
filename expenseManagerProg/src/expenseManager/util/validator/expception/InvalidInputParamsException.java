@@ -19,4 +19,9 @@ public class InvalidInputParamsException extends Exception {
     public InvalidInputParamsException(String s) {
         super(s);
     }
+
+    @Override
+    public String toString() {
+        return "Class: InvalidInputParamsException, Data Members: [ ]";
+    }
 }

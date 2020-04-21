@@ -19,4 +19,9 @@ public class InvalidInputFileFormatException extends Exception {
     public InvalidInputFileFormatException(String s) {
         super(s);
     }
+
+    @Override
+    public String toString() {
+        return "Class: InvalidInputFileFormatException, Data Members: [ ]";
+    }
 }

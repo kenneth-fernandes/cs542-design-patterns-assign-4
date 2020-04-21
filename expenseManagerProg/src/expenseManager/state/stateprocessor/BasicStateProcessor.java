@@ -39,4 +39,10 @@ public class BasicStateProcessor extends SpendingStateProcessor implements Spend
                 : UtilConstants.NO.getConstantValue();
     }
 
+    @Override
+    public String toString() {
+
+        return "Class: BasicStateProcessor, Data Members: [ basicStatePrcsrObj: " + basicStatePrcsrObj.toString() + "]";
+    }
+
 }

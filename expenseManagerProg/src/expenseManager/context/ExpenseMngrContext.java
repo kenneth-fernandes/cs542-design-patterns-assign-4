@@ -178,4 +178,13 @@ public class ExpenseMngrContext implements SpendingStateI, ExpenseMngrContextI {
         currentStateObj.processItemPuchasability(item);
     }
 
+    @Override
+    public String toString() {
+        return "Class : ExpenseMngrContext, Data Members [ runAvgWinSize:" + runAvgWinSize + ", basicStateObj "
+                + basicStateObj.toString() + ", luxuriousStateObj: " + luxuriousStateObj.toString()
+                + ", extravaganStateObj:" + extravaganStateObj + ", extravaganStateObj:" + moneyCreditLst
+                + ", runAvgCreditAmount: " + runAvgCreditAmount + "]";
+
+    }
+
 }

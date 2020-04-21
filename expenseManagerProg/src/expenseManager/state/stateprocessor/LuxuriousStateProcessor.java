@@ -48,4 +48,10 @@ public class LuxuriousStateProcessor extends SpendingStateProcessor implements S
                         : UtilConstants.NO.getConstantValue();
     }
 
+    @Override
+    public String toString() {
+
+        return "Class: LuxuriousStateProcessor, Data Members: [ luxStatePrcsrObj: " + luxStatePrcsrObj.toString() + "]";
+    }
+
 }

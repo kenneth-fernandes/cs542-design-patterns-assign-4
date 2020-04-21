@@ -22,7 +22,7 @@ import expenseManager.util.validator.expception.FileNotProcessedException;
 public class FileProcessor implements FileProcessorI {
 
 	// The BufferedReader for reading data from the file
-	private BufferedReader br;
+	private BufferedReader bufferedReader;
 	// Stores the interface of ValidatorUtilI for ValidatorUtil instance
 	ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
 	// Stores the interface of ValidatorFetcherI for ValidatorFetcher instance
@@ -49,7 +49,7 @@ public class FileProcessor implements FileProcessorI {
 		try {
 			validatrUtilObj.validateFileProcessor(ExceptionConstants.INPUT_FILE_ERROR_MSG.getErrorMsg(),
 					validatrFetchrObj.inputFileEmptyValidatn(file = new File(filePath)));
-			br = new BufferedReader(new FileReader(file));
+			bufferedReader = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			throw e;
 		}
@@ -63,7 +63,7 @@ public class FileProcessor implements FileProcessorI {
 	 */
 	public String readLine() throws IOException {
 		String line = null;
-		return ((line = br.readLine()) != null) ? line.trim() : line;
+		return ((line = bufferedReader.readLine()) != null) ? line.trim() : line;
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class FileProcessor implements FileProcessorI {
 	 */
 	public void closeFile() throws IOException {
 		try {
-			if (br != null)
-				br.close();
+			if (bufferedReader != null)
+				bufferedReader.close();
 		} catch (IOException e) {
 			throw e;
 		}
@@ -83,6 +83,8 @@ public class FileProcessor implements FileProcessorI {
 
 	@Override
 	public String toString() {
-		return "FileProcessor [bufferedReader=" + br + "]";
+		return "Class: ExpenseManagerInput, Data Members: [bufferedReader:" + bufferedReader + ", validatrUtilObj: "
+				+ validatrUtilObj.toString() + ", validatrFetchrObj: " + validatrFetchrObj.toString() + ", file: "
+				+ file.getAbsolutePath() + "]";
 	}
 }

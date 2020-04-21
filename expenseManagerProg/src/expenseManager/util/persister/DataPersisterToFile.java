@@ -73,7 +73,7 @@ public class DataPersisterToFile implements DataPersisterToFileI {
 
     @Override
     public String toString() {
-        return "PersistToFile : (buffrdWriter=" + buffrdWriter + ", file = " + file + ", fileWriter =" + fileWriter
-                + ")";
+        return "Class: PersistToFile, Data Members : [ buffrdWriter:" + buffrdWriter + ", file: " + file
+                + ", fileWriter:" + fileWriter + "]";
     }
 }

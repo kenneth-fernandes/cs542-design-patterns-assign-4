@@ -59,4 +59,12 @@ public class ExtravagantState implements SpendingStateI {
                             + extvgntStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
     }
+
+    @Override
+    public String toString() {
+
+        return "Class: ExtravagantState, Data Members: [ expenseMngrCntxtObj: " + expenseMngrCntxtObj.toString()
+                + ", extvgntStatePrcsrObj: " + extvgntStatePrcsrObj.toString() + "]";
+    }
+
 }
