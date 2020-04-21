@@ -48,23 +48,29 @@ public interface ValidatorFetcherI {
     public ValidatorI outputFilePathValidatn(String input);
 
     /**
+     * The function performs validation of input file empty
      * 
-     * @param input
-     * @return
+     * @param file - File object of the input file
+     * @return - The implemented interface ValidatorI performing the input file
+     *         empty validation
      */
     public ValidatorI inputFileEmptyValidatn(File file);
 
     /**
+     * The function performs validation of available items data format
      * 
-     * @param data
-     * @return
+     * @param data - Data from available items file
+     * @return - The implemented interface ValidatorI performing the available items
+     *         data format validation
      */
     public ValidatorI availItmFileFormatValidn(String data);
 
     /**
+     * The function performs validation of input data format
      * 
-     * @param data
-     * @return
+     * @param data - Data from the input file
+     * @return - The implemented interface ValidatorI performing the input data
+     *         format validation
      */
     public ValidatorI inputFileFormatValidn(String data);
 

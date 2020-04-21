@@ -35,8 +35,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the function performs validation of input filepath
-     * parameter
+     * The function performs validation of input filepath parameter
      * 
      * @param input - The input parameter entered for input file-path
      * @return - The implemented interface ValidatorI performing the input filepath
@@ -54,8 +53,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the function performs validation of available items
-     * filepath parameter
+     * The function performs validation of available items filepath parameter
      * 
      * @param input - The input parameter entered for available items file-path
      * @return - The implemented interface ValidatorI performing the available items
@@ -73,8 +71,8 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the function performs validation of window size
-     * parameter used for running average calculation
+     * The function performs validation of window size parameter used for running
+     * average calculation
      * 
      * @param input - The input parameter entered for window size
      * @return - The implemented interface ValidatorI performing validation of
@@ -104,8 +102,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the function performs validation of output filepath
-     * parameter
+     * The function performs validation of output filepath parameter
      * 
      * @param input - The input parameter entered for output file-path
      * @return - The implemented interface ValidatorI performing the output filepath
@@ -123,10 +120,11 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * The implementation of the
+     * The function performs validation of input file empty
      * 
-     * @param file -
-     * @return -
+     * @param file - File object of the input file
+     * @return - The implemented interface ValidatorI performing the input file
+     *         empty validation
      */
     public ValidatorI inputFileEmptyValidatn(File file) {
         return new ValidatorI() {
@@ -141,31 +139,37 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * @param data -
-     * @return -
+     * The function performs validation of available items data format
+     * 
+     * @param data - Data from available items file
+     * @return - The implemented interface ValidatorI performing the available items
+     *         data format validation
      */
     public ValidatorI availItmFileFormatValidn(String data) {
         return new ValidatorI() {
             @Override
             public void run() throws Exception {
+                // Checking if data is empty
                 if (data.isBlank() || data.isEmpty()) {
                     throw new Exception(ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_EMPTY_ERROR_MSG.getErrorMsg());
-                } else if (!data
-                        .matches(ValidationConditionConstants.AVAILABLE_ITEM_FORMAT_REG_EXP.getConstantValue())) {
+                }
+                // Checking if the data matches the available item data format
+                else if (!data.matches(ValidationConditionConstants.AVAILABLE_ITEM_FORMAT_REG_EXP.getConstantValue())) {
                     throw new Exception(
                             ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
-                } else if (!data.split(
-                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                }
+                // Checking if the available item file has invalid types of item
+                else if (!data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                         .equals(ItemCostTypeConstants.BASIC_ITEM.getConstantValue())
-                        && !data.split(
-                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        && !data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                                 .equals(ItemCostTypeConstants.MODERATERATLY_EXPENSIVE_ITEM.getConstantValue())
-                        && !data.split(
-                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        && !data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                                 .equals(ItemCostTypeConstants.SUPER_EXPENSIVE_ITEM.getConstantValue())) {
                     throw new Exception(
                             ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
-                } else if (data
+                }
+                // Checking if available item name is not a whole number
+                else if (data
                         .matches(ItemCostTypeConstants.BASIC_ITEM.getConstantValue()
                                 + UtilConstants.COLON_CHAR.getConstantValue()
                                 + ValidationConditionConstants.NUMBER_REG_EXP.getConstantValue())
@@ -183,27 +187,34 @@ public class ValidatorFetcher implements ValidatorFetcherI {
     }
 
     /**
-     * @param data -
-     * @return -
+     * The function performs validation of input data format
+     * 
+     * @param data - Data from the input file
+     * @return - The implemented interface ValidatorI performing the input data
+     *         format validation
      */
     public ValidatorI inputFileFormatValidn(String data) {
         return new ValidatorI() {
             @Override
             public void run() throws Exception {
+                // Checking if data is empty
                 if (data.isBlank() || data.isEmpty()) {
                     throw new Exception(ExceptionConstants.INPUT_FILE_DATA_EMPTY_ERROR_MSG.getErrorMsg());
-                } else if (!data.matches(ValidationConditionConstants.INPUT_ITEM_FORMAT_REG_EXP.getConstantValue())
+                }
+                // Checking if the data matches the input file data format
+                else if (!data.matches(ValidationConditionConstants.INPUT_ITEM_FORMAT_REG_EXP.getConstantValue())
                         && !data.matches(ValidationConditionConstants.INPUT_MONEY_FORMAT_REG_EXP.getConstantValue())) {
                     throw new Exception(ExceptionConstants.INPUT_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
-                } else if (!data.split(
-                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                }
+                // Checking if the data matches the input file data format
+                else if (!data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                         .equals(UtilConstants.ITEM.getConstantValue())
-                        && !data.split(
-                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        && !data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                                 .equals(UtilConstants.MONEY.getConstantValue())) {
                     throw new Exception(ExceptionConstants.INPUT_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
-                } else if (data.split(
-                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                }
+                // Checking if the money is a valid number
+                else if (data.split(UtilConstants.COLON_CHAR.getConstantValue())[0]
                         .equals(UtilConstants.MONEY.getConstantValue())) {
                     try {
                         int num = Integer.parseInt(data.split(UtilConstants.MONEY.getConstantValue()

@@ -33,10 +33,12 @@ public final class ValidatorUtil implements ValidatorUtilI {
     }
 
     /**
-     * The function executes each ValidatorI's implemented functions
+     * The function executes each ValidatorI's implemented functions for input
+     * parameter validation
      * 
-     * @param - Base error message
-     * @param - Array of ValidatorI interfaces
+     * @param baseErrMsg - Base error message
+     * @param validators - Array of ValidatorI interfaces
+     * @throws InvalidInputParamsException - Invalid input parameter exception
      */
     public void validateInputParams(String baseErrMsg, ValidatorI... validators) throws InvalidInputParamsException {
         for (ValidatorI validator : validators) {
@@ -51,10 +53,12 @@ public final class ValidatorUtil implements ValidatorUtilI {
     }
 
     /**
-     * The function executes each ValidatorI's implemented functions
+     * The function executes each ValidatorI's implemented functions for file
+     * processor validation
      * 
-     * @param - Base error message
-     * @param - Array of ValidatorI interfaces
+     * @param baseErrMsg - Base error message
+     * @param validators - Array of ValidatorI interfaces
+     * @throws FileNotProcessedException - File not processed exception
      */
     public void validateFileProcessor(String baseErrMsg, ValidatorI... validators) throws FileNotProcessedException {
         for (ValidatorI validator : validators) {
@@ -69,10 +73,13 @@ public final class ValidatorUtil implements ValidatorUtilI {
     }
 
     /**
-     * The function executes each ValidatorI's implemented functions
+     * The function executes each ValidatorI's implemented functions for available
+     * items file data validation
      * 
-     * @param - Base error message
-     * @param - Array of ValidatorI interfaces
+     * @param baseErrMsg - Base error message
+     * @param validators - Array of ValidatorI interfaces
+     * @throws InvalidAvailItemFileFormatException - Invalid available items file
+     *                                             format exception
      */
     public void validateAvailItemFileData(String baseErrMsg, ValidatorI... validators)
             throws InvalidAvailItemFileFormatException {
@@ -89,10 +96,13 @@ public final class ValidatorUtil implements ValidatorUtilI {
     }
 
     /**
-     * The function executes each ValidatorI's implemented functions
+     * The function executes each ValidatorI's implemented functions for input file
+     * data validation
      * 
-     * @param - Base error message
-     * @param - Array of ValidatorI interfaces
+     * 
+     * @param baseErrMsg - Base error message
+     * @param validators - Array of ValidatorI interfaces
+     * @throws InvalidInputFileFormatException - Invalid input file format exception
      */
     public void validateInputFileData(String baseErrMsg, ValidatorI... validators)
             throws InvalidInputFileFormatException {
