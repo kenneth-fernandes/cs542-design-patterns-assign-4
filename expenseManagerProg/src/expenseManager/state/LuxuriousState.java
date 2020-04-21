@@ -7,6 +7,7 @@ import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
 import expenseManager.state.stateprocessor.LuxuriousStateProcessor;
 import expenseManager.state.stateprocessor.SpendingStateProcessorI;
+import expenseManager.util.constants.UtilConstants;
 
 /**
  * LuxuriousSpendingState
@@ -56,7 +57,10 @@ public class LuxuriousState implements SpendingStateI {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
             ExpenseMngrResults.getExpnseResInstance()
-                    .storeResults("LUXURIOUS::" + item + "--" + luxStatePrcsrObj.getIsPurchasableByItemType(itemType));
+                    .storeResults(UtilConstants.LUXURIOUS_STATE.getConstantValue()
+                            + UtilConstants.DOUBLE_COLON.getConstantValue() + item
+                            + UtilConstants.DOUBLE_HYPHEN.getConstantValue()
+                            + luxStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
     }
 

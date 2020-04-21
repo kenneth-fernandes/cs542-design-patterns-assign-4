@@ -3,6 +3,7 @@ package expenseManager.results;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import expenseManager.util.constants.UtilConstants;
 import expenseManager.util.persister.DataPersisterToFile;
 import expenseManager.util.persister.DataPersisterToFileI;
 
@@ -47,7 +48,7 @@ public class ExpenseMngrResults implements ExpenseResultsI, ExpenseResultPersist
      */
     @Override
     public void storeResults(String resultData) {
-        expenseResults = expenseResults.concat(resultData + "\n");
+        expenseResults = expenseResults.concat(resultData + UtilConstants.NEW_LINE_CHAR.getConstantValue());
     }
 
     /**

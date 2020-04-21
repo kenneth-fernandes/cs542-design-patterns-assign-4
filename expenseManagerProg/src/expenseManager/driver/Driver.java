@@ -10,6 +10,7 @@ import expenseManager.results.ExpenseResultPersisterI;
 import expenseManager.state.SpendingStateI;
 import expenseManager.dataprocess.InputDataProcessorI;
 import expenseManager.dataprocess.InputDataProcessor;
+import expenseManager.util.constants.ExceptionConstants;
 import expenseManager.util.fileprocess.FileProcessor;
 import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.input.ExpenseManagerInput;
@@ -43,16 +44,17 @@ public class Driver {
 					|| (args[1].equals("${availableItemsFile}")) || (args[2].equals("${runAvgWinSize}"))
 					|| (args[3].equals("${outputFile}"))) {
 
-				System.err.printf("\nError: Incorrect number of arguments. Program accepts 4 argumnets.");
+				System.err.printf(ExceptionConstants.USER_INPUT_INCORRECT_NUMBER_OF_ARGS_ERROR_MSG.getErrorMsg());
 
 				System.exit(0);
 			} else {
 
+				// Stores the interface of ValidatorUtilI for ValidatorUtil instance
 				ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
-
+				// Stores the interface of ValidatorFetcherI for ValidatorFetcher instance
 				ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
 
-				validatrUtilObj.validateInputParams("User-Input Error",
+				validatrUtilObj.validateInputParams(ExceptionConstants.USER_INPUT_ERROR_MESSAGE.getErrorMsg(),
 						validatrFetchrObj.inputFilePathValidatn(args[0]),
 						validatrFetchrObj.availItmFilePathValidatn(args[1]),
 						validatrFetchrObj.runAvgWinSizeValidatn(args[2]),

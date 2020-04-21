@@ -1,5 +1,8 @@
 package expenseManager.state.stateprocessor;
 
+import expenseManager.util.constants.ItemCostTypeConstants;
+import expenseManager.util.constants.UtilConstants;
+
 public class BasicStateProcessor extends SpendingStateProcessor implements SpendingStateProcessorI {
     // Stores the SpendingStateProcessorI interface for BasicStateProcessor
     // instance
@@ -31,7 +34,9 @@ public class BasicStateProcessor extends SpendingStateProcessor implements Spend
     @Override
     public String isPurchasable(String itemType) {
 
-        return itemType.equals("basic") ? "YES" : "NO";
+        return itemType.equals(ItemCostTypeConstants.BASIC_ITEM.getConstantValue())
+                ? UtilConstants.YES.getConstantValue()
+                : UtilConstants.NO.getConstantValue();
     }
 
 }

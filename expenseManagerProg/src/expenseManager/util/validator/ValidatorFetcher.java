@@ -2,7 +2,10 @@ package expenseManager.util.validator;
 
 import java.io.File;
 
-import expenseManager.util.constants.ExceptionsConstants;
+import expenseManager.util.constants.ExceptionConstants;
+import expenseManager.util.constants.ItemCostTypeConstants;
+import expenseManager.util.constants.UtilConstants;
+import expenseManager.util.constants.ValidationConditionConstants;
 
 /**
  * ValidatorFetcher class - Implements the ValidatorFetcherI interface functions
@@ -13,8 +16,6 @@ import expenseManager.util.constants.ExceptionsConstants;
 public class ValidatorFetcher implements ValidatorFetcherI {
     // The variable hold the interface of ValidatorFetcher instance
     private static ValidatorFetcherI validatrFetchrObj = new ValidatorFetcher();
-    //
-    private ExceptionsConstants exceptionConsts;
 
     /**
      * The function returns the interface of ValidatorFetcher object's single
@@ -46,7 +47,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception(ExceptionsConstants.INPUT_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
+                    throw new Exception(ExceptionConstants.INPUT_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -65,7 +66,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception(ExceptionsConstants.AVAILABLE_ITEM_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
+                    throw new Exception(ExceptionConstants.AVAILABLE_ITEM_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -84,17 +85,17 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception(ExceptionsConstants.WINDOW_SIZE_PARAMETER_EMPTY_ERROR_MSG.getErrorMsg());
+                    throw new Exception(ExceptionConstants.WINDOW_SIZE_PARAMETER_EMPTY_ERROR_MSG.getErrorMsg());
                 } else {
                     try {
                         int value = Integer.parseInt(input);
                         if (value <= 0) {
                             throw new Exception(
-                                    ExceptionsConstants.WINDOW_SIZE_PARAMETER_NEGATIVE_VALUE_ERROR_MSG.getErrorMsg());
+                                    ExceptionConstants.WINDOW_SIZE_PARAMETER_NEGATIVE_VALUE_ERROR_MSG.getErrorMsg());
                         }
                     } catch (NumberFormatException e) {
                         throw new Exception(
-                                ExceptionsConstants.WINDOW_SIZE_PARAMETER_INVALID_FORMAT_ERROR_MSG.getErrorMsg());
+                                ExceptionConstants.WINDOW_SIZE_PARAMETER_INVALID_FORMAT_ERROR_MSG.getErrorMsg());
                     }
 
                 }
@@ -115,8 +116,7 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (input.isBlank() || input.isEmpty()) {
-                    throw new Exception("File path parameter, for storing the final outcome mentioning the "
-                            + "purchasable/ non-purchasable items along with the spending state, is empty.");
+                    throw new Exception(ExceptionConstants.OUTPUT_FILE_PATH_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -133,7 +133,8 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (file.length() == 0) {
-                    throw new Exception("The input file or the available items list file is empty.");
+                    throw new Exception(
+                            ExceptionConstants.INPUT_AVAILABLE_ITEMS_FILE_CONTENTS_EMPTY_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -148,15 +149,34 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (data.isBlank() || data.isEmpty()) {
-                    throw new Exception("The data read from the available items file is blank or empty.");
-                } else if (!data.matches("^[a-z]+[a-zA-Z]*:[a-zA-Z0-9\\W]+")) {
-                    throw new Exception("The data read from the available items file is not in correct format.");
-                } else if (!data.split(":")[0].equals("basic") && !data.split(":")[0].equals("moderatelyExpensive")
-                        && !data.split(":")[0].equals("superExpensive")) {
-                    throw new Exception("The data read from the available items file is not in correct format.");
-                } else if (data.matches("basic:[0-9]+") || data.matches("moderatelyExpensive:[0-9]+")
-                        || data.matches("superExpensive:[0-9]+")) {
-                    throw new Exception("The data read from the available items file has a numeric item name.");
+                    throw new Exception(ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_EMPTY_ERROR_MSG.getErrorMsg());
+                } else if (!data
+                        .matches(ValidationConditionConstants.AVAILABLE_ITEM_FORMAT_REG_EXP.getConstantValue())) {
+                    throw new Exception(
+                            ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
+                } else if (!data.split(
+                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        .equals(ItemCostTypeConstants.BASIC_ITEM.getConstantValue())
+                        && !data.split(
+                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                                .equals(ItemCostTypeConstants.MODERATERATLY_EXPENSIVE_ITEM.getConstantValue())
+                        && !data.split(
+                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                                .equals(ItemCostTypeConstants.SUPER_EXPENSIVE_ITEM.getConstantValue())) {
+                    throw new Exception(
+                            ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
+                } else if (data
+                        .matches(ItemCostTypeConstants.BASIC_ITEM.getConstantValue()
+                                + UtilConstants.COLON_CHAR.getConstantValue()
+                                + ValidationConditionConstants.NUMBER_REG_EXP.getConstantValue())
+                        || data.matches(ItemCostTypeConstants.MODERATERATLY_EXPENSIVE_ITEM.getConstantValue()
+                                + UtilConstants.COLON_CHAR.getConstantValue()
+                                + ValidationConditionConstants.NUMBER_REG_EXP.getConstantValue())
+                        || data.matches(ItemCostTypeConstants.SUPER_EXPENSIVE_ITEM.getConstantValue()
+                                + UtilConstants.COLON_CHAR.getConstantValue()
+                                + ValidationConditionConstants.NUMBER_REG_EXP.getConstantValue())) {
+                    throw new Exception(
+                            ExceptionConstants.AVAILABLE_ITEM_FILE_DATA_NUMERIC_ITEM_NAME_ERROR_MSG.getErrorMsg());
                 }
             }
         };
@@ -171,25 +191,29 @@ public class ValidatorFetcher implements ValidatorFetcherI {
             @Override
             public void run() throws Exception {
                 if (data.isBlank() || data.isEmpty()) {
-                    throw new Exception("The data read from the input file, having money and items that can "
-                            + "be purchased, is blank or empty.");
-                } else if (!data.matches("^[a-z]+:[a-zA-Z0-9\\W]+") && !data.matches("^[a-z]+:[0-9]+")) {
-                    throw new Exception(
-                            "The data read from the input file, having money and items that can be purchased, "
-                                    + "is not in correct format.");
-                } else if (!data.split(":")[0].equals("item") && !data.split(":")[0].equals("money")) {
-                    throw new Exception(
-                            "The data read from the input file, having money and items that can be purchased, "
-                                    + "is not in correct format.");
-                } else if (data.split(":")[0].equals("money")) {
+                    throw new Exception(ExceptionConstants.INPUT_FILE_DATA_EMPTY_ERROR_MSG.getErrorMsg());
+                } else if (!data.matches(ValidationConditionConstants.INPUT_ITEM_FORMAT_REG_EXP.getConstantValue())
+                        && !data.matches(ValidationConditionConstants.INPUT_MONEY_FORMAT_REG_EXP.getConstantValue())) {
+                    throw new Exception(ExceptionConstants.INPUT_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
+                } else if (!data.split(
+                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        .equals(UtilConstants.ITEM.getConstantValue())
+                        && !data.split(
+                                UtilConstants.COLON_CHAR.getConstantValue())[0]
+                                .equals(UtilConstants.MONEY.getConstantValue())) {
+                    throw new Exception(ExceptionConstants.INPUT_FILE_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
+                } else if (data.split(
+                        UtilConstants.COLON_CHAR.getConstantValue())[0]
+                        .equals(UtilConstants.MONEY.getConstantValue())) {
                     try {
-                        int num = Integer.parseInt(data.split("money:")[1]);
+                        int num = Integer.parseInt(data.split(UtilConstants.MONEY.getConstantValue()
+                                + UtilConstants.COLON_CHAR.getConstantValue())[1]);
                         if (num <= 0)
-                            throw new Exception("The data read from the input file, having money and items that "
-                                    + "can be purchased, has money earned as less than or equal to zero.");
+                            throw new Exception(
+                                    ExceptionConstants.INPUT_FILE_MONEY_DATA_INCORRECT_FORMAT_ERROR_MSG.getErrorMsg());
                     } catch (NumberFormatException e) {
-                        throw new Exception("The money data read from the input file, having money and items that "
-                                + "can be purchased, has a invalid integer value.");
+                        throw new Exception(
+                                ExceptionConstants.INPUT_FILE_MONEY_INCORRECT_INTEGER_FORMAT_ERROR_MSG.getErrorMsg());
                     }
 
                 }

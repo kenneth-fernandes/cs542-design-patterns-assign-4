@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import expenseManager.util.constants.ExceptionConstants;
 import expenseManager.util.validator.ValidatorFetcher;
 import expenseManager.util.validator.ValidatorFetcherI;
 import expenseManager.util.validator.ValidatorUtil;
@@ -22,11 +23,11 @@ public class FileProcessor implements FileProcessorI {
 
 	// The BufferedReader for reading data from the file
 	private BufferedReader br;
-	//
+	// Stores the interface of ValidatorUtilI for ValidatorUtil instance
 	ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
-	//
+	// Stores the interface of ValidatorFetcherI for ValidatorFetcher instance
 	ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
-	//
+	// Stores the File instance
 	private File file;
 
 	/**
@@ -46,7 +47,7 @@ public class FileProcessor implements FileProcessorI {
 	 */
 	public FileProcessor(String filePath) throws FileNotProcessedException, FileNotFoundException {
 		try {
-			validatrUtilObj.validateFileProcessor("Input-file Error",
+			validatrUtilObj.validateFileProcessor(ExceptionConstants.INPUT_FILE_ERROR_MSG.getErrorMsg(),
 					validatrFetchrObj.inputFileEmptyValidatn(file = new File(filePath)));
 			br = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {

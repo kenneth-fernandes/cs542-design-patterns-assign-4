@@ -7,6 +7,7 @@ import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
 import expenseManager.state.stateprocessor.BasicStateProcessor;
 import expenseManager.state.stateprocessor.SpendingStateProcessorI;
+import expenseManager.util.constants.UtilConstants;
 
 /**
  * BasicSpendingState class - Implements the functions of the SpendingStateI
@@ -59,8 +60,10 @@ public class BasicState implements SpendingStateI {
     public void processItemPuchasability(String item) {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
-            ExpenseMngrResults.getExpnseResInstance()
-                    .storeResults("BASIC::" + item + "--" + basicStatePrcsrObj.getIsPurchasableByItemType(itemType));
+            ExpenseMngrResults.getExpnseResInstance().storeResults(
+                    UtilConstants.BASIC_STATE.getConstantValue() + UtilConstants.DOUBLE_COLON.getConstantValue() + item
+                            + UtilConstants.DOUBLE_HYPHEN.getConstantValue()
+                            + basicStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
 
     }

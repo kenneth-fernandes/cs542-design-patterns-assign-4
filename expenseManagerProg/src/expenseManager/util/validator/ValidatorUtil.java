@@ -1,5 +1,6 @@
 package expenseManager.util.validator;
 
+import expenseManager.util.constants.UtilConstants;
 import expenseManager.util.validator.expception.FileNotProcessedException;
 import expenseManager.util.validator.expception.InvalidAvailItemFileFormatException;
 import expenseManager.util.validator.expception.InvalidInputFileFormatException;
@@ -42,7 +43,8 @@ public final class ValidatorUtil implements ValidatorUtilI {
             try {
                 validator.run();
             } catch (Exception e) {
-                throw new InvalidInputParamsException(baseErrMsg.concat(": " + e.getMessage()));
+                throw new InvalidInputParamsException(baseErrMsg.concat(UtilConstants.COLON_CHAR.getConstantValue()
+                        + UtilConstants.SINGLE_SPACE.getConstantValue() + e.getMessage()));
             }
         }
 
@@ -59,7 +61,8 @@ public final class ValidatorUtil implements ValidatorUtilI {
             try {
                 validator.run();
             } catch (Exception e) {
-                throw new FileNotProcessedException(baseErrMsg.concat(": " + e.getMessage()));
+                throw new FileNotProcessedException(baseErrMsg.concat(UtilConstants.COLON_CHAR.getConstantValue()
+                        + UtilConstants.SINGLE_SPACE.getConstantValue() + e.getMessage()));
             }
         }
 
@@ -77,12 +80,14 @@ public final class ValidatorUtil implements ValidatorUtilI {
             try {
                 validator.run();
             } catch (Exception e) {
-                throw new InvalidAvailItemFileFormatException(baseErrMsg.concat(": " + e.getMessage()));
+                throw new InvalidAvailItemFileFormatException(
+                        baseErrMsg.concat(UtilConstants.COLON_CHAR.getConstantValue()
+                                + UtilConstants.SINGLE_SPACE.getConstantValue() + e.getMessage()));
             }
         }
 
     }
-    
+
     /**
      * The function executes each ValidatorI's implemented functions
      * 
@@ -95,7 +100,8 @@ public final class ValidatorUtil implements ValidatorUtilI {
             try {
                 validator.run();
             } catch (Exception e) {
-                throw new InvalidInputFileFormatException(baseErrMsg.concat(": " + e.getMessage()));
+                throw new InvalidInputFileFormatException(baseErrMsg.concat(UtilConstants.COLON_CHAR.getConstantValue()
+                        + UtilConstants.SINGLE_SPACE.getConstantValue() + e.getMessage()));
             }
         }
 

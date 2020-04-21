@@ -1,5 +1,8 @@
 package expenseManager.state.stateprocessor;
 
+import expenseManager.util.constants.ItemCostTypeConstants;
+import expenseManager.util.constants.UtilConstants;
+
 /**
  * LuxuriousStateProcessor class - Extends the functions, to process spending
  * state, of SpendingStateProcessor abstract class which in-turn implements the
@@ -39,7 +42,10 @@ public class LuxuriousStateProcessor extends SpendingStateProcessor implements S
     @Override
     public String isPurchasable(String itemType) {
 
-        return itemType.equals("basic") || itemType.equals("moderatelyExpensive") ? "YES" : "NO";
+        return itemType.equals(ItemCostTypeConstants.BASIC_ITEM.getConstantValue())
+                || itemType.equals(ItemCostTypeConstants.MODERATERATLY_EXPENSIVE_ITEM.getConstantValue())
+                        ? UtilConstants.YES.getConstantValue()
+                        : UtilConstants.NO.getConstantValue();
     }
 
 }

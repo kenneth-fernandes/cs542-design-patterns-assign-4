@@ -1,5 +1,8 @@
 package expenseManager.state.stateprocessor;
 
+import expenseManager.util.constants.ItemCostTypeConstants;
+import expenseManager.util.constants.UtilConstants;
+
 public class ExtravagantStateProcessor extends SpendingStateProcessor implements SpendingStateProcessorI {
     // Stores the SpendingStateProcessorI interface for ExtravagantStateProcessor
     // instance
@@ -32,8 +35,10 @@ public class ExtravagantStateProcessor extends SpendingStateProcessor implements
     @Override
     public String isPurchasable(String itemType) {
 
-        return itemType.equals("basic") || itemType.equals("moderatelyExpensive") || itemType.equals("superExpensive")
-                ? "YES"
-                : "NO";
+        return itemType.equals(ItemCostTypeConstants.BASIC_ITEM.getConstantValue())
+                || itemType.equals(ItemCostTypeConstants.MODERATERATLY_EXPENSIVE_ITEM.getConstantValue())
+                || itemType.equals(ItemCostTypeConstants.SUPER_EXPENSIVE_ITEM.getConstantValue())
+                        ? UtilConstants.YES.getConstantValue()
+                        : UtilConstants.NO.getConstantValue();
     }
 }

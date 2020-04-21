@@ -3,6 +3,8 @@ package expenseManager.dataprocess;
 import java.io.IOException;
 
 import expenseManager.state.SpendingStateI;
+import expenseManager.util.constants.ExceptionConstants;
+import expenseManager.util.constants.UtilConstants;
 import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.validator.ValidatorFetcher;
 import expenseManager.util.validator.ValidatorFetcherI;
@@ -60,9 +62,10 @@ public class InputDataProcessor implements InputDataProcessorI {
             throws InvalidInputFileFormatException, IOException {
         try {
             while ((lineData = fileProcessorObj.readLine()) != null) {
-                validatrUtilObj.validateInputFileData("Input-file data processing error",
+                validatrUtilObj.validateInputFileData(
+                        ExceptionConstants.INPUT_FILE_DATA_PROCESSING_ERROR_MSG.getErrorMsg(),
                         validatrFetchrObj.inputFileFormatValidn(lineData));
-                String[] keyValPairArr = lineData.split(":");
+                String[] keyValPairArr = lineData.split(UtilConstants.COLON_CHAR.getConstantValue());
                 if (isItemData(keyValPairArr[0]))
                     context.processItemPuchasability(keyValPairArr[1]);
 

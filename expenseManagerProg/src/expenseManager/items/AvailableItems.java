@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import expenseManager.util.constants.ExceptionConstants;
+import expenseManager.util.constants.UtilConstants;
 import expenseManager.util.fileprocess.FileProcessorI;
 import expenseManager.util.validator.ValidatorFetcher;
 import expenseManager.util.validator.ValidatorFetcherI;
@@ -20,15 +22,15 @@ import expenseManager.util.validator.expception.InvalidAvailItemFileFormatExcept
  * @author Kenneth Peter Fernandes
  */
 public class AvailableItems implements AvailableItemsI {
-    //
+    // Stores the AvailableItemsI interface for AvailableItems instance
     private static AvailableItemsI availItemsObj = new AvailableItems();
-    //
+    // Stores the list of type of item and item name
     private HashMap<String, List<String>> availItemsData = new HashMap<>();
-    //
+    // Stores the current line data processed from the Available Items file
     private String availItemData;
-    //
+    // Stores the interface of ValidatorUtilI for ValidatorUtil instance
     ValidatorUtilI validatrUtilObj = ValidatorUtil.getInstance();
-    //
+    // Stores the interface of ValidatorFetcherI for ValidatorFetcher instance
     ValidatorFetcherI validatrFetchrObj = ValidatorFetcher.getInstance();
 
     /**
@@ -63,9 +65,10 @@ public class AvailableItems implements AvailableItemsI {
 
         try {
             while ((availItemData = fileProcessorObj.readLine()) != null) {
-                validatrUtilObj.validateAvailItemFileData("Available Items data processing error",
+                validatrUtilObj.validateAvailItemFileData(
+                        ExceptionConstants.AVAILABLE_ITEMS_DATA_PROCESSING_ERROR_MSG.getErrorMsg(),
                         validatrFetchrObj.availItmFileFormatValidn(availItemData));
-                String[] keyValArr = availItemData.split(":");
+                String[] keyValArr = availItemData.split(UtilConstants.COLON_CHAR.getConstantValue());
                 insertData(keyValArr[0], keyValArr[1]);
             }
             fileProcessorObj.closeFile();

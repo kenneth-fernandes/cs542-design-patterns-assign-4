@@ -7,6 +7,7 @@ import expenseManager.items.AvailableItems;
 import expenseManager.results.ExpenseMngrResults;
 import expenseManager.state.stateprocessor.ExtravagantStateProcessor;
 import expenseManager.state.stateprocessor.SpendingStateProcessorI;
+import expenseManager.util.constants.UtilConstants;
 
 public class ExtravagantState implements SpendingStateI {
     // Stores the interface of ExpenseMngrContextI for ExpenseMngrContext instance
@@ -51,8 +52,11 @@ public class ExtravagantState implements SpendingStateI {
     public void processItemPuchasability(String item) {
         String itemType = AvailableItems.getInstance().getKeyByData(item);
         if (!itemType.isEmpty()) {
-            ExpenseMngrResults.getExpnseResInstance().storeResults(
-                    "EXTRAVAGANT::" + item + "--" + extvgntStatePrcsrObj.getIsPurchasableByItemType(itemType));
+            ExpenseMngrResults.getExpnseResInstance()
+                    .storeResults(UtilConstants.EXTRAVAGANT_STATE.getConstantValue()
+                            + UtilConstants.DOUBLE_COLON.getConstantValue() + item
+                            + UtilConstants.DOUBLE_HYPHEN.getConstantValue()
+                            + extvgntStatePrcsrObj.getIsPurchasableByItemType(itemType));
         }
     }
 }
